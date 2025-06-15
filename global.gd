@@ -9,7 +9,6 @@ signal pause(_is_paused: bool)
 signal update_score(points: int)
 signal health_changed(new_health: int)
 signal max_health_changed(new_health: int)
-signal open_item_details(item: Control)
 signal death(killed: CharacterBody2D)
 
 var entities = {}

@@ -12,7 +12,7 @@ func apply(node: Node2D, attack_context: AttackContext):
 		match direction:
 			source.OWNER: from = attack_context.collision_position
 			source.COLLISION: from = attack_context.owner_position
-			
+		print("knock")
 		node.apply_knockback(from.direction_to(node.global_position), force)
 			
 	

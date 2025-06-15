@@ -8,7 +8,7 @@ func _init() -> void:
 
 func pick_up() -> void:
 	var container: UpgradeItemContainer = container_scene.instantiate()
-	container.upgrade = upgrade
 	container.icon = icon
 	container.type = type
+	container.details = self
 	add_to_inventory(container)

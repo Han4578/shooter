@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://b0ymen4yhdw58" path="res://scenes/items/item container/upgrade/UpgradeItemContainer.tscn" id="1_dw6e7"]
 [ext_resource type="Script" path="res://scenes/items/collectible/UpgradeItem.gd" id="1_kwm4v"]
-[ext_resource type="Texture2D" uid="uid://bbkwjnar5bwp5" path="res://scenes/attachments/glove in a box/glove_in_a_box.png" id="2_71ke2"]
-[ext_resource type="Script" path="res://scenes/attachments/glove in a box/glove_in_a_box.gd" id="2_ylbi1"]
+[ext_resource type="Texture2D" uid="uid://bbkwjnar5bwp5" path="res://scenes/attachments/glove in a box/icon.png" id="2_twi4g"]
+[ext_resource type="Resource" uid="uid://hm81apye5aii" path="res://scenes/attachments/glove in a box/upgrade.tres" id="4_t30mg"]
 
 [resource]
 script = ExtResource("1_kwm4v")
-upgrade = ExtResource("2_ylbi1")
+upgrade = ExtResource("4_t30mg")
 container_scene = ExtResource("1_dw6e7")
 rarity = 0
-icon = ExtResource("2_71ke2")
+icon = ExtResource("2_twi4g")

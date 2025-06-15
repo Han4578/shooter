@@ -20,6 +20,7 @@ func _on_pause(is_paused: bool):
 func close_all_menus():
 	pause_menu.visible = false
 	inventory_menu.visible = false
+	InventoryManager.close_weapon_details.emit()
 	
 func toggle_menu(node: Control):
 	if node.visible:

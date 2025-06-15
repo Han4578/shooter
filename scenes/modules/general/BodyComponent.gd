@@ -5,6 +5,8 @@ var stat_upgrades := StatUpgrades.new()
 
 @export var stats_component: StatsComponent
 
+signal effect_applied(effect: Effect, attack_context: AttackContext)
+
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
@@ -24,3 +26,7 @@ func create_attack_context() -> AttackContext:
 
 func _on_attack_context_requested(node: CollisionBoxComponent) -> void:
 	node.attack_context = create_attack_context()
+
+
+func _on_effect_applied(effect: Effect, attack_context: AttackContext) -> void:
+	effect.apply(self, attack_context)

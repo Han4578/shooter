@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_v5fhr")
-force = 1
+force = 100
 direction = 0
 priority = 0

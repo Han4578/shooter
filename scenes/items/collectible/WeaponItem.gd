@@ -16,5 +16,6 @@ func pick_up() -> void:
 	var container: WeaponItemContainer = container_scene.instantiate()
 	container.content = weapon_scene.instantiate()
 	container.icon = icon
+	container.details = self
 	add_to_inventory(container)
 	

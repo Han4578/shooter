@@ -3,6 +3,7 @@ class_name CollectibleItem
 
 @export var container_scene: PackedScene
 @export var rarity: Rarity
+
 var type: InventoryManager.ItemTypes
 
 func add_to_inventory(container: ItemContainer) -> void:

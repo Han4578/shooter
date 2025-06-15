@@ -12,9 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://4p5wnmtaujdi" path="res://scenes/UI/inventory/frame.png" id="8_qyveq"]
 [ext_resource type="StyleBox" uid="uid://tqwesepin84e" path="res://scenes/UI/pause menu/pause_menu_style_box_texture.tres" id="8_sampg"]
 [ext_resource type="PackedScene" uid="uid://dhfxpa5ma0cg4" path="res://scenes/UI/inventory/inventory.tscn" id="9_t12fk"]
+[ext_resource type="Script" path="res://scenes/UI/weapon details menu/weapon_details_menu.gd" id="10_aark3"]
 [ext_resource type="Texture2D" uid="uid://bps66dhmhy2vs" path="res://scenes/weapons/pump action shotgun/pump action shotgun.png" id="13_a1t1k"]
-[ext_resource type="Script" path="res://scenes/UI/WeaponDetails.gd" id="13_j8olg"]
-[ext_resource type="PackedScene" uid="uid://bx6koh5if118m" path="res://scenes/UI/inventory/upgrade_slot.tscn" id="15_bg2jq"]
+[ext_resource type="PackedScene" uid="uid://bx6koh5if118m" path="res://scenes/UI/weapon details menu/upgrade_slot.tscn" id="15_bg2jq"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -224,33 +224,43 @@ patch_margin_left = 32
 patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
-script = ExtResource("13_j8olg")
 
-[node name="WeaponBg" type="TextureRect" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails"]
-self_modulate = Color(1, 1, 1, 0.784314)
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 400.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("10_aark3")
+
+[node name="WeaponBg" type="TextureRect" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.784314)
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
 texture = ExtResource("13_a1t1k")
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg"]
+[node name="Label" type="Label" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer/VBoxContainer/WeaponBg"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 30.0
-offset_right = 70.0
-offset_bottom = 46.0
+offset_left = 45.0
+offset_top = 45.0
+offset_right = 120.0
+offset_bottom = 61.0
 text = "Shawtgun"
 
-[node name="Line2D" type="Line2D" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg"]
-position = Vector2(0, 59.1111)
+[node name="Line2D" type="Line2D" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer/VBoxContainer/WeaponBg"]
+position = Vector2(0, 60)
 scale = Vector2(1, 0.755555)
-points = PackedVector2Array(500, 80, 500, 240, 500, 160, 300, 160, 300, 240, 300, 160, 500, 160, 700, 160, 700, 240)
+points = PackedVector2Array(500, 80, 500, 240, 500, 160, 300, 160, 300, 240, 300, 160, 500, 160, 604.735, 160, 700, 160, 700, 240)
 
-[node name="ModuleSlot" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
+[node name="ModuleSlot" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer/VBoxContainer/WeaponBg" instance=ExtResource("15_bg2jq")]
 layout_mode = 1
 anchor_left = 0.5
 anchor_top = 0.2
@@ -259,20 +269,25 @@ anchor_bottom = 0.2
 offset_top = -40.0
 offset_bottom = 40.0
 grow_vertical = 2
+
+[node name="ChipSlot" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer/VBoxContainer/WeaponBg" instance=ExtResource("15_bg2jq")]
+layout_mode = 1
+index = 1
 type = 1
 
-[node name="ChipSlot" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
-layout_mode = 1
-
-[node name="ChipSlot3" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
+[node name="ChipSlot3" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer/VBoxContainer/WeaponBg" instance=ExtResource("15_bg2jq")]
 layout_mode = 1
 anchor_left = 0.5
 anchor_right = 0.5
+index = 2
+type = 1
 
-[node name="ChipSlot4" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
+[node name="ChipSlot4" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/ScrollContainer/VBoxContainer/WeaponBg" instance=ExtResource("15_bg2jq")]
 layout_mode = 1
 anchor_left = 0.7
 anchor_right = 0.7
+index = 3
+type = 1
 
 [node name="PauseMenu" type="NinePatchRect" parent="Control"]
 process_mode = 2

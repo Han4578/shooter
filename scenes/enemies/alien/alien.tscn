@@ -92,5 +92,6 @@ sprite = NodePath("../Sprite2D")
 [connection signal="direction_changed" from="TrackingComponent" to="MovementComponent" method="set_direction"]
 [connection signal="direction_changed" from="TrackingComponent" to="RotationComponent" method="change_rotation"]
 [connection signal="damage_taken" from="HitBoxComponent" to="StatsComponent" method="_on_damage_taken"]
+[connection signal="effect_applied" from="HitBoxComponent" to="." method="_on_effect_applied"]
 [connection signal="area_entered" from="CollisionBoxComponent" to="CollisionBoxComponent" method="_on_area_entered"]
 [connection signal="attack_context_requested" from="CollisionBoxComponent" to="." method="_on_attack_context_requested"]

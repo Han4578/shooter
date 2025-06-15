@@ -26,8 +26,7 @@ func _on_area_entered(area: Area2D) -> void:
 		attack_context_requested.emit(self)
 		attack_context.stat_upgrades.add_effects(collision_effects, hit_effects)
 	
-	for effect: CollisionEffect in attack_context.stat_upgrades.collision_effects:
-		effect.apply(area, attack_context)
+	attack_context.collide(area)
 		
 	area_collided.emit()
 	

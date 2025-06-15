@@ -20,6 +20,8 @@ enum ItemTypes {WEAPON=0, ATTACHMENT=1, CHIP=2}
 
 signal active_swapped(index: int)
 signal inventory_signal(type: ItemTypes, is_full: bool)
+signal open_weapon_details(item: Control)
+signal close_weapon_details()
 	
 func _ready() -> void:
 	weapons.resize(num_of_weapon_slots)
