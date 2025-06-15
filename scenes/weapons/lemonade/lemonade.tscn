@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c42qb7o53hqk3"]
+
+[ext_resource type="Texture2D" uid="uid://cgywvdiri7hbt" path="res://scenes/weapons/lemonade/lemonade.png" id="2_1rngi"]
+[ext_resource type="Script" path="res://scenes/weapons/weapon_class.gd" id="6_wcvgj"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/target component/TargetComponent.gd" id="7_1m6y7"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/SingleTriggerComponent.gd" id="8_x8wjq"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/barrel component/AreaBarrelComponent.gd" id="9_ol1nn"]
+
+[node name="MainWeapon" type="Node2D"]
+z_index = 1
+script = ExtResource("6_wcvgj")
+damage = 10
+icon = ExtResource("2_1rngi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1rngi")
+offset = Vector2(30, 0)
+
+[node name="TargetComponent" type="Node2D" parent="Sprite2D"]
+position = Vector2(98, -6)
+script = ExtResource("7_1m6y7")
+
+[node name="Primary" type="Node2D" parent="."]
+script = ExtResource("8_x8wjq")
+fire_rate = 0.2
+full_auto = true
+
+[node name="AreaBarrelComponent" type="Node2D" parent="Primary"]
+script = ExtResource("9_ol1nn")
+launch_particle = true
+particle_texture = ExtResource("2_1rngi")
+
+[connection signal="primary_trigger" from="." to="Primary" method="_on_trigger"]
+[connection signal="target_position" from="Sprite2D/TargetComponent" to="Primary/AreaBarrelComponent" method="_on_trigger"]
+[connection signal="cd_end" from="Primary" to="." method="_on_cd_end"]
+[connection signal="cd_start" from="Primary" to="." method="_on_cd_start"]
+[connection signal="trigger" from="Primary" to="Sprite2D/TargetComponent" method="_on_trigger"]

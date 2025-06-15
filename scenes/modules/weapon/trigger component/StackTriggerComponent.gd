@@ -1,0 +1,2 @@
+extends TriggerComponent
+class_name StackTriggerComponent

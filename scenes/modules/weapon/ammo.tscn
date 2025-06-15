@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://oinbf010ffk3"]
+
+[node name="Ammo" type="Label"]
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 36.0
+offset_bottom = 23.0
+text = "III"
+horizontal_alignment = 1
+vertical_alignment = 2

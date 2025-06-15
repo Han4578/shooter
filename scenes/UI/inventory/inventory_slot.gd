@@ -1,0 +1,34 @@
+extends Control
+class_name InventorySlot
+
+@export var type : InventoryManager.ItemTypes
+
+var occupied := false
+	
+func _ready() -> void:
+	InventoryManager.inventory[type].append(self)
+	
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+	return data is ItemContainer and data.type == type
+
+func _drop_data(_at_position: Vector2, data: Variant) -> void:
+	if (occupied): get_child(-1).reparent(data.get_parent(), false)
+	data.reparent(self, false)
+	
+func _on_child_entered_tree(node: Node) -> void:
+	if node is ItemContainer:
+		if node is WeaponItemContainer: node.content.current_owner = Global.player
+		occupied = true
+		InventoryManager.inventory_count[node.type] -= 1
+			
+		if InventoryManager.inventory_count[node.type] == 0: 
+			InventoryManager.inventory_signal.emit(node.type, true)
+
+func _on_child_exiting_tree(node: Node) -> void:
+	if node is ItemContainer:
+		occupied = false
+		InventoryManager.inventory_count[node.type] += 1
+			
+		if InventoryManager.inventory_count[node.type] == 1: 
+			InventoryManager.inventory_signal.emit(node.type, false)
+	

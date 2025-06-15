@@ -1,0 +1,161 @@
+[gd_scene load_steps=27 format=3 uid="uid://cupsgy3wu68sd"]
+
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/CollisionEffect.gd" id="3_316yk"]
+[ext_resource type="Texture2D" uid="uid://bgqmkee0e150r" path="res://scenes/weapons/pistol/pistol.png" id="3_ospr8"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/hit effects/HitEffect.gd" id="4_vld6q"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/ScalingParameter.gd" id="4_xuudt"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/SingleDamageEffect.gd" id="5_c7udh"]
+[ext_resource type="Script" path="res://scenes/weapons/weapon_class.gd" id="5_gpns0"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/StatUpgrades.gd" id="5_ilnju"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/AreaDamageEffect.gd" id="7_ap2pc"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/SingleTriggerComponent.gd" id="7_b1eai"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/barrel component/RapidBarrelComponent.gd" id="7_fhmtu"]
+[ext_resource type="Script" path="res://scenes/weapons/pistol/line_2d.gd" id="7_mf24n"]
+[ext_resource type="PackedScene" uid="uid://bffo61oboxv55" path="res://scenes/weapons/projectile/bullet.tscn" id="8_atxs2"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/target component/TargetComponent.gd" id="8_qxmjp"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/FrontProjectileComponent.gd" id="8_x3l8v"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/StateChangeTriggerComponent.gd" id="15_pj5by"]
+[ext_resource type="Script" path="res://scenes/modules/general/RotationComponent.gd" id="15_u08ad"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/CooldownComponent.gd" id="16_t5rrw"]
+[ext_resource type="Script" path="res://scenes/modules/general/movement component/TrackingComponent.gd" id="17_quyey"]
+
+[sub_resource type="Resource" id="Resource_fi4ik"]
+resource_local_to_scene = true
+script = ExtResource("5_ilnju")
+collision_effects = Array[ExtResource("3_316yk")]([])
+hit_effects = Array[ExtResource("4_vld6q")]([])
+
+[sub_resource type="Resource" id="Resource_dyfgx"]
+script = ExtResource("4_xuudt")
+parameter = 0
+scaling = 2.0
+flat_amount = 0
+
+[sub_resource type="Resource" id="Resource_tbhto"]
+script = ExtResource("5_c7udh")
+parameter = SubResource("Resource_dyfgx")
+priority = 0
+
+[sub_resource type="Resource" id="Resource_qb0rp"]
+resource_local_to_scene = true
+script = ExtResource("5_ilnju")
+collision_effects = Array[ExtResource("3_316yk")]([SubResource("Resource_tbhto")])
+hit_effects = Array[ExtResource("4_vld6q")]([])
+
+[sub_resource type="Resource" id="Resource_m4vet"]
+resource_local_to_scene = true
+script = ExtResource("5_ilnju")
+collision_effects = Array[ExtResource("3_316yk")]([])
+hit_effects = Array[ExtResource("4_vld6q")]([])
+
+[sub_resource type="Resource" id="Resource_yk5yk"]
+script = ExtResource("4_xuudt")
+parameter = 0
+scaling = 0.5
+flat_amount = 0
+
+[sub_resource type="Resource" id="Resource_bmb5l"]
+script = ExtResource("7_ap2pc")
+explosion_level = 5
+parameter = SubResource("Resource_yk5yk")
+priority = 0
+
+[sub_resource type="Resource" id="Resource_vb5rr"]
+resource_local_to_scene = true
+script = ExtResource("5_ilnju")
+collision_effects = Array[ExtResource("3_316yk")]([SubResource("Resource_bmb5l")])
+hit_effects = Array[ExtResource("4_vld6q")]([])
+
+[node name="MainWeapon" type="Node2D" node_paths=PackedStringArray("primary_trigger", "secondary_trigger", "passive_trigger")]
+z_index = 1
+position = Vector2(0, 25)
+script = ExtResource("5_gpns0")
+general_stat_upgrades = SubResource("Resource_fi4ik")
+primary_trigger = NodePath("PrimaryTrigger")
+primary_stat_upgrades = SubResource("Resource_qb0rp")
+secondary_trigger = NodePath("SecondaryTrigger")
+secondary_stat_upgrades = SubResource("Resource_m4vet")
+passive_trigger = NodePath("PassiveTrigger")
+passive_stat_upgrades = SubResource("Resource_vb5rr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = ExtResource("3_ospr8")
+offset = Vector2(12, -6)
+
+[node name="Line2D" type="Line2D" parent="Sprite2D"]
+visible = false
+position = Vector2(28, -13)
+points = PackedVector2Array(0, 0, 1000, 0)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
+script = ExtResource("7_mf24n")
+
+[node name="PrimaryTarget" type="Node2D" parent="Sprite2D"]
+position = Vector2(25, -13)
+script = ExtResource("8_qxmjp")
+
+[node name="PassiveTarget" type="Node2D" parent="Sprite2D"]
+script = ExtResource("8_qxmjp")
+target_to = 4
+
+[node name="RotationComponent" type="Node2D" parent="Sprite2D" node_paths=PackedStringArray("sprite")]
+position = Vector2(25, -13)
+script = ExtResource("15_u08ad")
+sprite = NodePath("..")
+
+[node name="PrimaryTrigger" type="Node2D" parent="."]
+script = ExtResource("7_b1eai")
+fire_rate = 0.5
+ignore_other_input = true
+
+[node name="RapidBarrelComponent" type="Node2D" parent="PrimaryTrigger"]
+z_index = 1
+rotation = 1.5708
+script = ExtResource("7_fhmtu")
+spread = 0.0
+
+[node name="FrontProjectileComponent" type="Node2D" parent="PrimaryTrigger"]
+script = ExtResource("8_x3l8v")
+projectile = ExtResource("8_atxs2")
+
+[node name="Cooldown" type="Timer" parent="PrimaryTrigger" node_paths=PackedStringArray("trigger_component")]
+one_shot = true
+script = ExtResource("16_t5rrw")
+trigger_component = NodePath("..")
+
+[node name="SecondaryTrigger" type="Node2D" parent="."]
+script = ExtResource("15_pj5by")
+change_on_click = true
+ignore_cd = true
+ignore_other_input = true
+
+[node name="PassiveTrigger" type="Node2D" parent="."]
+script = ExtResource("7_b1eai")
+fire_rate = 1.0
+
+[node name="Cooldown" type="Timer" parent="PassiveTrigger" node_paths=PackedStringArray("trigger_component")]
+one_shot = true
+script = ExtResource("16_t5rrw")
+trigger_component = NodePath("..")
+
+[node name="TrackingComponent" type="Node2D" parent="."]
+script = ExtResource("17_quyey")
+target = 2
+change_every_process = true
+
+[connection signal="target_direction" from="Sprite2D/PrimaryTarget" to="PrimaryTrigger/RapidBarrelComponent" method="_on_trigger"]
+[connection signal="target_direction" from="Sprite2D/PassiveTarget" to="PrimaryTrigger/RapidBarrelComponent" method="_on_trigger"]
+[connection signal="cd_start" from="PrimaryTrigger" to="." method="_on_cd_start"]
+[connection signal="cd_start" from="PrimaryTrigger" to="PrimaryTrigger/Cooldown" method="start"]
+[connection signal="trigger" from="PrimaryTrigger" to="Sprite2D/PrimaryTarget" method="_on_trigger"]
+[connection signal="trigger" from="PrimaryTrigger/RapidBarrelComponent" to="PrimaryTrigger/FrontProjectileComponent" method="_on_trigger"]
+[connection signal="cd_end" from="PrimaryTrigger/Cooldown" to="." method="_on_cd_end"]
+[connection signal="timeout" from="PrimaryTrigger/Cooldown" to="PrimaryTrigger/Cooldown" method="_on_timeout"]
+[connection signal="trigger" from="SecondaryTrigger" to="Sprite2D/Line2D" method="_on_trigger_barrel" unbinds=1]
+[connection signal="cd_start" from="PassiveTrigger" to="." method="_on_cd_start"]
+[connection signal="cd_start" from="PassiveTrigger" to="PassiveTrigger/Cooldown" method="start"]
+[connection signal="trigger" from="PassiveTrigger" to="Sprite2D/PassiveTarget" method="_on_trigger"]
+[connection signal="cd_end" from="PassiveTrigger/Cooldown" to="." method="_on_passive_end" unbinds=1]
+[connection signal="timeout" from="PassiveTrigger/Cooldown" to="PassiveTrigger/Cooldown" method="_on_timeout"]
+[connection signal="direction_changed" from="TrackingComponent" to="Sprite2D/RotationComponent" method="change_rotation"]

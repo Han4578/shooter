@@ -1,0 +1,418 @@
+[gd_scene load_steps=16 format=3 uid="uid://cgjkwnxubbg6i"]
+
+[ext_resource type="Script" path="res://scenes/UI/pause menu/pause_menu.gd" id="1_wr63j"]
+[ext_resource type="Script" path="res://scenes/UI/health bar/health_bar.gd" id="2_2jrrv"]
+[ext_resource type="Texture2D" uid="uid://btvw70eb25gky" path="res://scenes/UI/inventory/weapon slot/weapon_slot_selected_64.png" id="2_gqao0"]
+[ext_resource type="Script" path="res://scenes/UI/inventory/weapon slot/weapon_container.gd" id="3_8st8j"]
+[ext_resource type="Texture2D" uid="uid://b7qf0upv6ungc" path="res://scenes/UI/inventory/weapon slot/weapon_slot_selected.png" id="3_62kr2"]
+[ext_resource type="Texture2D" uid="uid://dj2enj0glib8d" path="res://scenes/UI/health bar/health progress.png" id="4_h7kke"]
+[ext_resource type="Texture2D" uid="uid://b1q0ew1xcchg5" path="res://scenes/UI/pause menu/pause_menu_texture.png" id="5_34aym"]
+[ext_resource type="Script" path="res://scenes/UI/score.gd" id="7_2fkv5"]
+[ext_resource type="FontFile" uid="uid://dndkvr7xgiofq" path="res://scenes/UI/Minecraft.ttf" id="7_gcntj"]
+[ext_resource type="Texture2D" uid="uid://4p5wnmtaujdi" path="res://scenes/UI/inventory/frame.png" id="8_qyveq"]
+[ext_resource type="StyleBox" uid="uid://tqwesepin84e" path="res://scenes/UI/pause menu/pause_menu_style_box_texture.tres" id="8_sampg"]
+[ext_resource type="PackedScene" uid="uid://dhfxpa5ma0cg4" path="res://scenes/UI/inventory/inventory.tscn" id="9_t12fk"]
+[ext_resource type="Texture2D" uid="uid://bps66dhmhy2vs" path="res://scenes/weapons/pump action shotgun/pump action shotgun.png" id="13_a1t1k"]
+[ext_resource type="Script" path="res://scenes/UI/WeaponDetails.gd" id="13_j8olg"]
+[ext_resource type="PackedScene" uid="uid://bx6koh5if118m" path="res://scenes/UI/inventory/upgrade_slot.tscn" id="15_bg2jq"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_wr63j")
+
+[node name="PauseShade" type="ColorRect" parent="Control"]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.509804)
+
+[node name="TopLeftCorner" type="MarginContainer" parent="Control"]
+process_mode = 1
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TopLeftCorner"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control/TopLeftCorner/VBoxContainer"]
+custom_minimum_size = Vector2(1000, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+step = 0.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 17
+stretch_margin_top = 17
+stretch_margin_right = 17
+stretch_margin_bottom = 17
+texture_under = ExtResource("2_gqao0")
+texture_over = ExtResource("3_62kr2")
+texture_progress = ExtResource("4_h7kke")
+script = ExtResource("2_2jrrv")
+
+[node name="WeaponSlots" type="HBoxContainer" parent="Control/TopLeftCorner/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+script = ExtResource("3_8st8j")
+
+[node name="Score" type="Label" parent="Control/TopLeftCorner"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Score: 0"
+script = ExtResource("7_2fkv5")
+
+[node name="InventoryMenu" type="Control" parent="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 190.0
+offset_bottom = 190.0
+
+[node name="Inventory" type="MarginContainer" parent="Control/InventoryMenu"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 920.0
+offset_right = 1920.0
+offset_bottom = 700.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 50
+
+[node name="InventoryBackground" type="NinePatchRect" parent="Control/InventoryMenu/Inventory"]
+custom_minimum_size = Vector2(800, 700)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("8_qyveq")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Label" type="Label" parent="Control/InventoryMenu/Inventory/InventoryBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.0
+offset_top = -50.0
+offset_right = 49.0
+offset_bottom = -10.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "INVENTORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/InventoryMenu/Inventory/InventoryBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+scroll_vertical_custom_step = 1.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(700, 600)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 40
+
+[node name="WeaponSection" type="VBoxContainer" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/WeaponSection"]
+layout_mode = 2
+text = "WEAPONS"
+
+[node name="Inventor" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/WeaponSection" instance=ExtResource("9_t12fk")]
+layout_mode = 2
+
+[node name="ModuleSection" type="VBoxContainer" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/ModuleSection"]
+layout_mode = 2
+text = "MODULES"
+
+[node name="Inventor" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/ModuleSection" instance=ExtResource("9_t12fk")]
+layout_mode = 2
+type = 1
+
+[node name="ChipSection" type="VBoxContainer" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/ChipSection"]
+layout_mode = 2
+text = "CHIPS"
+
+[node name="Inventor" parent="Control/InventoryMenu/Inventory/InventoryBackground/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/ChipSection" instance=ExtResource("9_t12fk")]
+layout_mode = 2
+type = 2
+
+[node name="WeaponDetailsMargin" type="MarginContainer" parent="Control/InventoryMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 1050.0
+offset_bottom = 850.0
+grow_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="WeaponDetails" type="NinePatchRect" parent="Control/InventoryMenu/WeaponDetailsMargin"]
+custom_minimum_size = Vector2(1000, 800)
+layout_mode = 2
+texture = ExtResource("8_qyveq")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+script = ExtResource("13_j8olg")
+
+[node name="WeaponBg" type="TextureRect" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails"]
+self_modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 400.0
+grow_horizontal = 2
+texture = ExtResource("13_a1t1k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 70.0
+offset_bottom = 46.0
+text = "Shawtgun"
+
+[node name="Line2D" type="Line2D" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg"]
+position = Vector2(0, 59.1111)
+scale = Vector2(1, 0.755555)
+points = PackedVector2Array(500, 80, 500, 240, 500, 160, 300, 160, 300, 240, 300, 160, 500, 160, 700, 160, 700, 240)
+
+[node name="ModuleSlot" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+offset_top = -40.0
+offset_bottom = 40.0
+grow_vertical = 2
+type = 1
+
+[node name="ChipSlot" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
+layout_mode = 1
+
+[node name="ChipSlot3" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+
+[node name="ChipSlot4" parent="Control/InventoryMenu/WeaponDetailsMargin/WeaponDetails/WeaponBg" instance=ExtResource("15_bg2jq")]
+layout_mode = 1
+anchor_left = 0.7
+anchor_right = 0.7
+
+[node name="PauseMenu" type="NinePatchRect" parent="Control"]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -350.0
+offset_right = 250.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_34aym")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Resume" type="Button" parent="Control/PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_gcntj")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = ExtResource("8_sampg")
+theme_override_styles/disabled_mirrored = ExtResource("8_sampg")
+theme_override_styles/disabled = ExtResource("8_sampg")
+theme_override_styles/hover_pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover_pressed = ExtResource("8_sampg")
+theme_override_styles/hover_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover = ExtResource("8_sampg")
+theme_override_styles/pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/pressed = ExtResource("8_sampg")
+theme_override_styles/normal_mirrored = ExtResource("8_sampg")
+theme_override_styles/normal = ExtResource("8_sampg")
+text = "RESUME"
+icon_alignment = 1
+
+[node name="Inventory" type="Button" parent="Control/PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_gcntj")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = ExtResource("8_sampg")
+theme_override_styles/disabled_mirrored = ExtResource("8_sampg")
+theme_override_styles/disabled = ExtResource("8_sampg")
+theme_override_styles/hover_pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover_pressed = ExtResource("8_sampg")
+theme_override_styles/hover_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover = ExtResource("8_sampg")
+theme_override_styles/pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/pressed = ExtResource("8_sampg")
+theme_override_styles/normal_mirrored = ExtResource("8_sampg")
+theme_override_styles/normal = ExtResource("8_sampg")
+text = "INVENTORY"
+icon_alignment = 1
+
+[node name="Settings" type="Button" parent="Control/PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_gcntj")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = ExtResource("8_sampg")
+theme_override_styles/disabled_mirrored = ExtResource("8_sampg")
+theme_override_styles/disabled = ExtResource("8_sampg")
+theme_override_styles/hover_pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover_pressed = ExtResource("8_sampg")
+theme_override_styles/hover_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover = ExtResource("8_sampg")
+theme_override_styles/pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/pressed = ExtResource("8_sampg")
+theme_override_styles/normal_mirrored = ExtResource("8_sampg")
+theme_override_styles/normal = ExtResource("8_sampg")
+text = "SETTINGS"
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="Control/PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_gcntj")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = ExtResource("8_sampg")
+theme_override_styles/disabled_mirrored = ExtResource("8_sampg")
+theme_override_styles/disabled = ExtResource("8_sampg")
+theme_override_styles/hover_pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover_pressed = ExtResource("8_sampg")
+theme_override_styles/hover_mirrored = ExtResource("8_sampg")
+theme_override_styles/hover = ExtResource("8_sampg")
+theme_override_styles/pressed_mirrored = ExtResource("8_sampg")
+theme_override_styles/pressed = ExtResource("8_sampg")
+theme_override_styles/normal_mirrored = ExtResource("8_sampg")
+theme_override_styles/normal = ExtResource("8_sampg")
+text = "QUIT"
+icon_alignment = 1
+
+[connection signal="pressed" from="Control/PauseMenu/VBoxContainer/Resume" to="Control" method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/PauseMenu/VBoxContainer/Inventory" to="Control" method="_on_inventory_pressed"]

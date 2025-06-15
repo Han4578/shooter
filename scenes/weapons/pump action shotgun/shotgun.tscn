@@ -1,0 +1,62 @@
+[gd_scene load_steps=14 format=3 uid="uid://3ykph1yu6l12"]
+
+[ext_resource type="Texture2D" uid="uid://ygb7ga3hti5x" path="res://scenes/weapons/pump action shotgun/shotgun 2.png" id="2_3dxfk"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/barrel component/SpreadBarrelComponent.gd" id="3_ci5rw"]
+[ext_resource type="Script" path="res://scenes/weapons/weapon_class.gd" id="5_vwj6b"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/SingleTriggerComponent.gd" id="5_yeucd"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/target component/TargetComponent.gd" id="7_xv8my"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/FrontProjectileComponent.gd" id="8_3utun"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/CollisionEffect.gd" id="8_lgqbd"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/hit effects/HitEffect.gd" id="9_b2rpy"]
+[ext_resource type="PackedScene" uid="uid://bffo61oboxv55" path="res://scenes/weapons/projectile/bullet.tscn" id="9_gekcm"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/projectile movement/StraightProjectileMovement.gd" id="10_3ue52"]
+[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/ProjectileDetails.gd" id="12_14con"]
+
+[sub_resource type="Resource" id="Resource_f5tn7"]
+script = ExtResource("10_3ue52")
+projectile_speed = 1000.0
+
+[sub_resource type="Resource" id="Resource_j1win"]
+script = ExtResource("12_14con")
+movement = SubResource("Resource_f5tn7")
+despawn_time = 1.5
+collision_effects = Array[ExtResource("8_lgqbd")]([])
+hit_effects = Array[ExtResource("9_b2rpy")]([])
+
+[node name="MainWeapon" type="Node2D"]
+z_index = 1
+script = ExtResource("5_vwj6b")
+damage = 3
+icon = ExtResource("2_3dxfk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3dxfk")
+offset = Vector2(30, 0)
+
+[node name="TargetComponent" type="Node2D" parent="Sprite2D"]
+position = Vector2(98, -6)
+script = ExtResource("7_xv8my")
+target_to = 4
+
+[node name="Primary" type="Node2D" parent="."]
+script = ExtResource("5_yeucd")
+fire_rate = 1.0
+
+[node name="SpreadBarrelComponent2" type="Node2D" parent="Primary"]
+script = ExtResource("3_ci5rw")
+spread = 30.0
+projectile_count = 5
+
+[node name="FrontProjectileComponent" type="Node2D" parent="Primary"]
+position = Vector2(98, -6)
+rotation = 1.5708
+script = ExtResource("8_3utun")
+projectile = ExtResource("9_gekcm")
+projectile_details = SubResource("Resource_j1win")
+
+[connection signal="primary_trigger" from="." to="Primary" method="_on_trigger"]
+[connection signal="target_direction" from="Sprite2D/TargetComponent" to="Primary/SpreadBarrelComponent2" method="_on_trigger"]
+[connection signal="cd_end" from="Primary" to="." method="_on_cd_end"]
+[connection signal="cd_start" from="Primary" to="." method="_on_cd_start"]
+[connection signal="trigger" from="Primary" to="Sprite2D/TargetComponent" method="_on_trigger"]
+[connection signal="trigger" from="Primary/SpreadBarrelComponent2" to="Primary/FrontProjectileComponent" method="_on_trigger"]

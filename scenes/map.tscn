@@ -1,0 +1,70 @@
+[gd_scene load_steps=16 format=3 uid="uid://df4gk115fxibq"]
+
+[ext_resource type="Script" path="res://scenes/map.gd" id="1_2qbe3"]
+[ext_resource type="Script" path="res://scenes/tiles/floor.gd" id="1_4f4u1"]
+[ext_resource type="PackedScene" uid="uid://cbmcq0mfj2en3" path="res://scenes/player/player.tscn" id="2_ulyay"]
+[ext_resource type="Script" path="res://scenes/enemies/spawner.gd" id="3_yica7"]
+[ext_resource type="PackedScene" uid="uid://cgjkwnxubbg6i" path="res://scenes/UI/UI.tscn" id="4_pclxl"]
+[ext_resource type="PackedScene" uid="uid://22cha2x1awlc" path="res://scenes/items/ground item/GroundCollectible.tscn" id="5_535xt"]
+[ext_resource type="PackedScene" uid="uid://cfa1d7k1i77b0" path="res://scenes/items/item container/weapon/WeaponItemContainer.tscn" id="7_5ilo7"]
+[ext_resource type="Resource" uid="uid://dphjj40fqr3th" path="res://scenes/attachments/glove in a box/glove_in_a_box.tres" id="8_folem"]
+[ext_resource type="Texture2D" uid="uid://bgqmkee0e150r" path="res://scenes/weapons/pistol/pistol.png" id="8_l0w0l"]
+[ext_resource type="Script" path="res://scenes/items/collectible/SkillDescription.gd" id="9_l38s2"]
+[ext_resource type="Script" path="res://scenes/items/collectible/WeaponItem.gd" id="10_son2l"]
+[ext_resource type="PackedScene" uid="uid://cupsgy3wu68sd" path="res://scenes/weapons/pistol/pistol.tscn" id="11_dm5wm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmyxk"]
+
+[sub_resource type="Resource" id="Resource_kw4t7"]
+script = ExtResource("9_l38s2")
+name = &""
+cooldown = 0.0
+tags = Array[int]([])
+description = ""
+
+[sub_resource type="Resource" id="Resource_5b3t8"]
+script = ExtResource("10_son2l")
+name = &""
+primary_skill = SubResource("Resource_kw4t7")
+secondary_skill = SubResource("Resource_kw4t7")
+passive_skill = SubResource("Resource_kw4t7")
+weapon_scene = ExtResource("11_dm5wm")
+container_scene = ExtResource("7_5ilo7")
+rarity = 0
+icon = ExtResource("8_l0w0l")
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_2qbe3")
+
+[node name="Floor" type="Area2D" parent="."]
+z_index = -10
+collision_layer = 16
+script = ExtResource("1_4f4u1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+visible = false
+shape = SubResource("RectangleShape2D_cmyxk")
+
+[node name="Player2" parent="." instance=ExtResource("2_ulyay")]
+
+[node name="Cam" type="Camera2D" parent="Player2"]
+z_index = 1
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("3_yica7")
+
+[node name="Timer" type="Timer" parent="Spawner"]
+autostart = true
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_pclxl")]
+
+[node name="GroundItem" parent="." instance=ExtResource("5_535xt")]
+position = Vector2(-676, 207)
+collectible = SubResource("Resource_5b3t8")
+
+[node name="GroundCollectible" parent="." instance=ExtResource("5_535xt")]
+position = Vector2(-374, 211)
+collectible = ExtResource("8_folem")
+
+[connection signal="body_exited" from="Floor" to="Floor" method="_on_body_exited"]
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

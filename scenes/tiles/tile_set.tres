@@ -1,0 +1,24 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://riv2xr24ulj3"]
+
+[ext_resource type="Texture2D" uid="uid://c2njxuld4w0uu" path="res://sprites/tile.png" id="1_ek0oq"]
+[ext_resource type="Texture2D" uid="uid://vrh0choc7t5" path="res://sprites/rock.png" id="2_ryypo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2g61y"]
+resource_name = "floor 0"
+texture = ExtResource("1_ek0oq")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gdc44"]
+resource_name = "rock 1"
+texture = ExtResource("2_ryypo")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 7
+sources/0 = SubResource("TileSetAtlasSource_2g61y")
+sources/1 = SubResource("TileSetAtlasSource_gdc44")

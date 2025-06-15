@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx6koh5if118m"]
+
+[ext_resource type="Script" path="res://scenes/UI/upgrade_slot.gd" id="1_jtqv1"]
+
+[node name="ChipSlot" type="ColorRect"]
+custom_minimum_size = Vector2(80, 80)
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.8
+anchor_right = 0.3
+anchor_bottom = 0.8
+offset_left = -40.0
+offset_top = -80.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(1, 1, 1, 0.486275)
+script = ExtResource("1_jtqv1")
+type = 2
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

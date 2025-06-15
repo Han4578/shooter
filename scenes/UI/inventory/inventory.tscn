@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhfxpa5ma0cg4"]
+
+[ext_resource type="Script" path="res://scenes/UI/inventory/inventory.gd" id="1_lfg4n"]
+
+[node name="Inventory" type="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+size_flags_vertical = 4
+mouse_filter = 0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 8
+script = ExtResource("1_lfg4n")
+metadata/type = 0

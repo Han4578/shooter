@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://cbmcq0mfj2en3"]
+
+[ext_resource type="Script" path="res://scenes/player/PlayerBody.gd" id="1_d5d2x"]
+[ext_resource type="Script" path="res://scenes/player/stats_component.gd" id="2_o20tv"]
+[ext_resource type="Texture2D" uid="uid://dnfvkfx30ny1n" path="res://space_man.png" id="3_nq7ct"]
+[ext_resource type="Script" path="res://scenes/modules/general/movement component/MovementComponent.gd" id="3_xhegg"]
+[ext_resource type="Script" path="res://scenes/modules/general/HitBoxComponent.gd" id="4_xe53r"]
+[ext_resource type="Script" path="res://scenes/modules/general/movement component/knockback_component.gd" id="6_7wk1v"]
+[ext_resource type="Script" path="res://scenes/modules/general/RotationComponent.gd" id="8_k1h5p"]
+[ext_resource type="Script" path="res://scenes/modules/general/PickupComponent.gd" id="8_lxoo2"]
+[ext_resource type="Script" path="res://scenes/player/inventory_component.gd" id="9_fstaa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qnhp"]
+size = Vector2(54.5, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_finea"]
+size = Vector2(60, 44)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u2l37"]
+radius = 100.0
+
+[node name="Player2" type="CharacterBody2D" node_paths=PackedStringArray("stats_component") groups=["Ally"]]
+collision_mask = 8
+motion_mode = 1
+script = ExtResource("1_d5d2x")
+stats_component = NodePath("StatsComponent")
+
+[node name="StatsComponent" type="Node2D" parent="."]
+script = ExtResource("2_o20tv")
+attack_base = 10.0
+health_base = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.75, 8)
+shape = SubResource("RectangleShape2D_0qnhp")
+
+[node name="MovementComponent" type="Node2D" parent="."]
+script = ExtResource("3_xhegg")
+speed = 800
+
+[node name="KnockbackComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
+script = ExtResource("6_7wk1v")
+movement_component = NodePath("../MovementComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_nq7ct")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_xe53r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(0, 33)
+shape = SubResource("RectangleShape2D_finea")
+debug_color = Color(0.864378, 0.349263, 0.202768, 0.42)
+
+[node name="PickupComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+script = ExtResource("8_lxoo2")
+radius = 200
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupComponent"]
+shape = SubResource("CircleShape2D_u2l37")
+
+[node name="RotationComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_k1h5p")
+horizontal_only = true
+sprite = NodePath("../Sprite2D")
+
+[node name="InventoryComponent" type="Node2D" parent="."]
+script = ExtResource("9_fstaa")
+
+[connection signal="direction_changed" from="." to="MovementComponent" method="set_direction"]
+[connection signal="direction_changed" from="." to="PickupComponent" method="_on_direction_changed"]
+[connection signal="direction_changed" from="." to="RotationComponent" method="change_rotation"]
+[connection signal="death" from="StatsComponent" to="." method="_on_death"]
+[connection signal="death" from="StatsComponent" to="HitBoxComponent" method="_on_death"]
+[connection signal="velocity_changed" from="MovementComponent" to="." method="_on_velocity_changed"]
+[connection signal="damage_taken" from="HitBoxComponent" to="StatsComponent" method="_on_damage_taken"]
+[connection signal="body_entered" from="PickupComponent" to="PickupComponent" method="_on_body_entered"]
