@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
-InventoryManager="*res://InventoryManager.gd"
+Global="*res://singletons/global.gd"
+InventoryManager="*res://singletons/InventoryManager.gd"
 
 [debug]
 
@@ -48,6 +48,7 @@ Ally=""
 WeaponSlot=""
 ChipSlot=""
 AttachmentSlot=""
+Boid=""
 
 [gui]
 

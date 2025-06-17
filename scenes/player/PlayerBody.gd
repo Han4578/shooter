@@ -4,6 +4,9 @@ signal direction_changed(new_direction: Vector2)
 
 func _ready() -> void:
 	Global.player = self
+	
+func _physics_process(_delta: float) -> void:
+	move_and_slide()
 
 func process_input(event: InputEvent) -> void:
 	if (event is InputEventMouse):

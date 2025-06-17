@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://btoocuprax4oj"]
+[gd_scene load_steps=20 format=3 uid="uid://btoocuprax4oj"]
 
 [ext_resource type="Script" path="res://scenes/modules/general/BodyComponent.gd" id="1_bksu2"]
 [ext_resource type="Texture2D" uid="uid://d3gltw4bfbp7c" path="res://sprites/alien.png" id="2_ro1ih"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/SingleDamageEffect.gd" id="11_5mkqy"]
 [ext_resource type="Script" path="res://scenes/modules/general/RotationComponent.gd" id="12_3aguo"]
 [ext_resource type="Script" path="res://scenes/modules/general/EffectComponent.gd" id="13_f1575"]
+[ext_resource type="Script" path="res://scenes/modules/general/AreaBoidComponent2.gd" id="14_f4pso"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qu6qv"]
 radius = 30.0
@@ -31,10 +32,13 @@ script = ExtResource("11_5mkqy")
 parameter = SubResource("Resource_j5c6p")
 priority = 0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n5msg"]
+radius = 35.0
+
 [node name="Alien" type="CharacterBody2D" node_paths=PackedStringArray("stats_component") groups=["Enemy"]]
 z_index = 1
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_bksu2")
@@ -65,7 +69,6 @@ movement_component = NodePath("../MovementComponent")
 texture = ExtResource("2_ro1ih")
 
 [node name="HitBoxComponent" type="Area2D" parent="." groups=["Enemy"]]
-visible = false
 collision_layer = 2
 monitoring = false
 script = ExtResource("3_h0avi")
@@ -78,7 +81,7 @@ shape = SubResource("RectangleShape2D_gcpv3")
 monitorable = false
 script = ExtResource("8_6hbdw")
 refresh_context = true
-tick_speed = 1.0
+tick_speed = 0.5
 collision_effects = Array[ExtResource("9_ojcfy")]([SubResource("Resource_ejl58")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBoxComponent"]
@@ -92,6 +95,16 @@ sprite = NodePath("../Sprite2D")
 
 [node name="EffectComponent" type="Node2D" parent="."]
 script = ExtResource("13_f1575")
+
+[node name="AreaBoid" type="Area2D" parent="." node_paths=PackedStringArray("movement_component")]
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("14_f4pso")
+movement_component = NodePath("../MovementComponent")
+
+[node name="SqueezeBox2" type="CollisionShape2D" parent="AreaBoid"]
+position = Vector2(0, 42)
+shape = SubResource("CircleShape2D_n5msg")
 
 [connection signal="death" from="StatsComponent" to="." method="_on_death"]
 [connection signal="death" from="StatsComponent" to="HitBoxComponent" method="_on_death"]

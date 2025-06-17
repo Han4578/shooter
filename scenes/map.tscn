@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cgjkwnxubbg6i" path="res://scenes/UI/UI.tscn" id="4_pclxl"]
 [ext_resource type="PackedScene" uid="uid://22cha2x1awlc" path="res://scenes/items/ground item/GroundCollectible.tscn" id="5_535xt"]
 [ext_resource type="PackedScene" uid="uid://cfa1d7k1i77b0" path="res://scenes/items/item container/weapon/WeaponItemContainer.tscn" id="7_5ilo7"]
-[ext_resource type="Resource" uid="uid://dphjj40fqr3th" path="res://scenes/attachments/glove in a box/glove_in_a_box.tres" id="8_folem"]
+[ext_resource type="Resource" uid="uid://dphjj40fqr3th" path="res://attachments/glove in a box/glove_in_a_box.tres" id="8_folem"]
 [ext_resource type="Texture2D" uid="uid://bgqmkee0e150r" path="res://scenes/weapons/pistol/pistol.png" id="8_l0w0l"]
 [ext_resource type="Script" path="res://scenes/items/collectible/SkillDescription.gd" id="9_l38s2"]
 [ext_resource type="Script" path="res://scenes/items/collectible/WeaponItem.gd" id="10_son2l"]
@@ -54,7 +54,7 @@ z_index = 1
 script = ExtResource("3_yica7")
 
 [node name="Timer" type="Timer" parent="Spawner"]
-wait_time = 0.2
+wait_time = 0.5
 autostart = true
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_pclxl")]

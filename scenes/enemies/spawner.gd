@@ -3,6 +3,7 @@ extends Node2D
 var radius : int = 1000	
 var radius2 : int = radius ** 2
 
+
 var alien_scene := preload("res://scenes/enemies/alien/alien.tscn")
 
 func calc_pos(x : float):
@@ -17,4 +18,3 @@ func spawn_alien():
 	var alien = alien_scene.instantiate()
 	alien.position = Vector2(x, y)
 	add_sibling(alien)
-	

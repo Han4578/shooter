@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b0ymen4yhdw58" path="res://scenes/items/item container/upgrade/UpgradeItemContainer.tscn" id="1_dw6e7"]
 [ext_resource type="Script" path="res://scenes/items/collectible/UpgradeItem.gd" id="1_kwm4v"]
-[ext_resource type="Texture2D" uid="uid://bbkwjnar5bwp5" path="res://scenes/attachments/glove in a box/icon.png" id="2_twi4g"]
-[ext_resource type="Resource" uid="uid://hm81apye5aii" path="res://scenes/attachments/glove in a box/upgrade.tres" id="4_t30mg"]
+[ext_resource type="Texture2D" uid="uid://bbkwjnar5bwp5" path="res://attachments/glove in a box/icon.png" id="2_twi4g"]
+[ext_resource type="Resource" uid="uid://hm81apye5aii" path="res://attachments/glove in a box/upgrade.tres" id="4_t30mg"]
 
 [resource]
 script = ExtResource("1_kwm4v")

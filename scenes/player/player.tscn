@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_0qnhp")
 
 [node name="MovementComponent" type="Node2D" parent="."]
 script = ExtResource("3_xhegg")
-speed = 800
+speed = 300
 
 [node name="KnockbackComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
 script = ExtResource("6_7wk1v")
@@ -49,7 +49,6 @@ texture = ExtResource("3_nq7ct")
 [node name="HitBoxComponent" type="Area2D" parent="."]
 collision_mask = 0
 monitoring = false
-monitorable = false
 script = ExtResource("4_xe53r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]

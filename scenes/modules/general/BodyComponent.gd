@@ -6,7 +6,7 @@ var stat_upgrades := StatUpgrades.new()
 @export var stats_component: StatsComponent
 
 func _physics_process(delta: float) -> void:
-	move_and_slide()
+	position += velocity * delta
 	
 func _on_velocity_changed(new_velocity: Vector2):
 	velocity = new_velocity

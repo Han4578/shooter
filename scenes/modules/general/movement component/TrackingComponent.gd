@@ -4,14 +4,16 @@ class_name TrackingComponent
 enum Target {PLAYER, ALLY, ENEMY}
 @export var target: Target
 @export var change_every_process := false
+@onready var frame := Engine.get_physics_frames() % 20
 
 signal direction_changed(new_direction: Vector2)
 
 func _ready() -> void:
 	set_process(change_every_process)
 
-func _process(_delta: float) -> void:
-	change_target()
+func _physics_process(_delta: float) -> void:
+	if Engine.get_physics_frames() % 20 == frame:
+		change_target()
 			
 func change_target():
 		match target:

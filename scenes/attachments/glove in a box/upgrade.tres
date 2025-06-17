@@ -1,6 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://hm81apye5aii"]
-
-[ext_resource type="Script" path="res://scenes/attachments/glove in a box/upgrade.gd" id="1_77oam"]
-
-[resource]
-script = ExtResource("1_77oam")
