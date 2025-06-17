@@ -3,7 +3,7 @@ class_name AttackContext
 
 var attack: float
 var defence: float
-var health: float
+var max_health: float
 var owner: BodyComponent
 var owner_position: Vector2
 var collision_position: Vector2
@@ -19,6 +19,18 @@ func collide(area: HitBoxComponent):
 		
 func hit(area: HitBoxComponent):
 	for effect: HitEffect in stat_upgrades.hit_effects:
-		pass
-	##Todo
+		area.apply_effect(effect, self)
+		
+func get_owner_position():
+	return owner.global_position if is_instance_valid(owner) else owner_position
+		
+func get_attack():
+	return owner.stats_component.total_attack if is_instance_valid(owner) else attack
+		
+func get_defence():
+	return owner.stats_component.total_defence if is_instance_valid(owner) else defence
+		
+func get_max_health():
+	return owner.stats_component.total_health if is_instance_valid(owner) else max_health
+	
 	

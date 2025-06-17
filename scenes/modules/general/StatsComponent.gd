@@ -1,4 +1,4 @@
-extends Node2D
+extends Component
 class_name StatsComponent
 
 @export_group(&"Attack Modifiers", &"attack_")
@@ -46,5 +46,5 @@ func update_total_attack():
 func add_stats(attack_context: AttackContext):
 	attack_context.attack = total_attack
 	attack_context.defence = total_defence
-	attack_context.health = total_health
+	attack_context.max_health = total_health
 	

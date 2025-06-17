@@ -1,20 +1,16 @@
-extends Node2D
+extends Component
 class_name TrackingComponent
 
 enum Target {PLAYER, ALLY, ENEMY}
 @export var target: Target
 @export var change_every_process := false
 
-var start_tracking:
-	set(val):
-		set_physics_process(val and change_every_process)
-
 signal direction_changed(new_direction: Vector2)
 
 func _ready() -> void:
-	set_physics_process(change_every_process)
+	set_process(change_every_process)
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	change_target()
 			
 func change_target():
@@ -35,4 +31,10 @@ func find_closest(group_name: StringName) -> Node2D:
 			closest = entity
 			dist = d
 	return closest
+	
+func start_tracking():
+	set_process(true)
+	
+func stop_tracking():
+	set_process(false)
 	

@@ -54,6 +54,7 @@ z_index = 1
 script = ExtResource("3_yica7")
 
 [node name="Timer" type="Timer" parent="Spawner"]
+wait_time = 0.2
 autostart = true
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_pclxl")]

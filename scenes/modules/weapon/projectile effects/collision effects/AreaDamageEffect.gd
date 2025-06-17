@@ -18,3 +18,4 @@ func apply(hitbox: HitBoxComponent, attack_context: AttackContext) -> void:
 
 	for node in hitbox.get_world_2d().direct_space_state.intersect_shape(explosion_circle):
 		node[&"collider"].take_damage(attack_context.get_final_damage(parameter), attack_context)
+		attack_context.hit(node[&"collider"])

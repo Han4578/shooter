@@ -130,6 +130,7 @@ change_active_passive_slot={
 2d_physics/layer_4="obstacle"
 2d_physics/layer_5="platform"
 2d_physics/layer_6="item"
+2d_physics/layer_7="boid"
 
 [rendering]
 

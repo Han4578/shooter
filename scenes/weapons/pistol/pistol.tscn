@@ -25,15 +25,15 @@ script = ExtResource("5_ilnju")
 collision_effects = Array[ExtResource("3_316yk")]([])
 hit_effects = Array[ExtResource("4_vld6q")]([])
 
-[sub_resource type="Resource" id="Resource_dyfgx"]
+[sub_resource type="Resource" id="Resource_htyds"]
 script = ExtResource("4_xuudt")
 parameter = 0
-scaling = 2.0
+scaling = 1.0
 flat_amount = 0
 
 [sub_resource type="Resource" id="Resource_tbhto"]
 script = ExtResource("5_c7udh")
-parameter = SubResource("Resource_dyfgx")
+parameter = SubResource("Resource_htyds")
 priority = 0
 
 [sub_resource type="Resource" id="Resource_qb0rp"]
@@ -102,6 +102,7 @@ target_to = 4
 [node name="RotationComponent" type="Node2D" parent="Sprite2D" node_paths=PackedStringArray("sprite")]
 position = Vector2(25, -13)
 script = ExtResource("15_u08ad")
+follow_mouse = true
 sprite = NodePath("..")
 
 [node name="PrimaryTrigger" type="Node2D" parent="."]
@@ -142,8 +143,11 @@ trigger_component = NodePath("..")
 [node name="TrackingComponent" type="Node2D" parent="."]
 script = ExtResource("17_quyey")
 target = 2
-change_every_process = true
 
+[connection signal="passive_ended" from="." to="Sprite2D/RotationComponent" method="start_following_mouse"]
+[connection signal="passive_ended" from="." to="TrackingComponent" method="stop_tracking"]
+[connection signal="passive_started" from="." to="Sprite2D/RotationComponent" method="stop_following_mouse"]
+[connection signal="passive_started" from="." to="TrackingComponent" method="start_tracking"]
 [connection signal="target_direction" from="Sprite2D/PrimaryTarget" to="PrimaryTrigger/RapidBarrelComponent" method="_on_trigger"]
 [connection signal="target_direction" from="Sprite2D/PassiveTarget" to="PrimaryTrigger/RapidBarrelComponent" method="_on_trigger"]
 [connection signal="cd_start" from="PrimaryTrigger" to="." method="_on_cd_start"]

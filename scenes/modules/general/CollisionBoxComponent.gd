@@ -26,9 +26,10 @@ func _on_area_entered(area: Area2D) -> void:
 		attack_context_requested.emit(self)
 		attack_context.stat_upgrades.add_effects(collision_effects, hit_effects)
 	
+	attack_context.collision_position = (global_position + area.global_position) / 2
 	attack_context.collide(area)
 		
-	area_collided.emit()
+	area_collided.emit() #For projectile
 	
 	if not one_shot:
 		await get_tree().create_timer(tick_speed).timeout

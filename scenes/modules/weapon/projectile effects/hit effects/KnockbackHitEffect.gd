@@ -1,18 +1,21 @@
 extends HitEffect
 class_name KnockbackHitEffect
 
-enum source {OWNER, COLLISION}
+enum Point {OWNER, COLLISION, SELF}
 @export var force := 1
-@export var direction: source
+@export var from: Point
+@export var to: Point
 
 func apply(node: Node2D, attack_context: AttackContext):
 	if node is KnockbackComponent:
-		var from: Vector2
+		node.apply_knockback(get_pos(from, node, attack_context).direction_to(get_pos(to, node, attack_context)), force)
 		
-		match direction:
-			source.OWNER: from = attack_context.collision_position
-			source.COLLISION: from = attack_context.owner_position
-		print("knock")
-		node.apply_knockback(from.direction_to(node.global_position), force)
+func get_pos(of: Point, node: Node2D, attack_context: AttackContext) -> Vector2:
+	match of:
+		Point.OWNER: return attack_context.get_owner_position()
+		Point.COLLISION: return attack_context.collision_position
+		Point.SELF: return node.global_position
+		_: return Vector2.ZERO
+	
 			
 	

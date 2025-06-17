@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbmcq0mfj2en3"]
+[gd_scene load_steps=14 format=3 uid="uid://cbmcq0mfj2en3"]
 
 [ext_resource type="Script" path="res://scenes/player/PlayerBody.gd" id="1_d5d2x"]
 [ext_resource type="Script" path="res://scenes/player/stats_component.gd" id="2_o20tv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/modules/general/RotationComponent.gd" id="8_k1h5p"]
 [ext_resource type="Script" path="res://scenes/modules/general/PickupComponent.gd" id="8_lxoo2"]
 [ext_resource type="Script" path="res://scenes/player/inventory_component.gd" id="9_fstaa"]
+[ext_resource type="Script" path="res://scenes/modules/general/EffectComponent.gd" id="10_x285h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qnhp"]
 size = Vector2(54.5, 90)
@@ -48,6 +49,7 @@ texture = ExtResource("3_nq7ct")
 [node name="HitBoxComponent" type="Area2D" parent="."]
 collision_mask = 0
 monitoring = false
+monitorable = false
 script = ExtResource("4_xe53r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
@@ -73,6 +75,9 @@ sprite = NodePath("../Sprite2D")
 [node name="InventoryComponent" type="Node2D" parent="."]
 script = ExtResource("9_fstaa")
 
+[node name="EffectComponent" type="Node2D" parent="."]
+script = ExtResource("10_x285h")
+
 [connection signal="direction_changed" from="." to="MovementComponent" method="set_direction"]
 [connection signal="direction_changed" from="." to="PickupComponent" method="_on_direction_changed"]
 [connection signal="direction_changed" from="." to="RotationComponent" method="change_rotation"]
@@ -80,4 +85,8 @@ script = ExtResource("9_fstaa")
 [connection signal="death" from="StatsComponent" to="HitBoxComponent" method="_on_death"]
 [connection signal="velocity_changed" from="MovementComponent" to="." method="_on_velocity_changed"]
 [connection signal="damage_taken" from="HitBoxComponent" to="StatsComponent" method="_on_damage_taken"]
+[connection signal="effect_applied" from="HitBoxComponent" to="EffectComponent" method="_on_effect_applied"]
 [connection signal="body_entered" from="PickupComponent" to="PickupComponent" method="_on_body_entered"]
+[connection signal="effect_applied" from="EffectComponent" to="StatsComponent" method="_on_effect_applied"]
+[connection signal="effect_applied" from="EffectComponent" to="MovementComponent" method="_on_effect_applied"]
+[connection signal="effect_applied" from="EffectComponent" to="KnockbackComponent" method="_on_effect_applied"]

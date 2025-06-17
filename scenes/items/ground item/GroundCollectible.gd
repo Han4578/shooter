@@ -6,13 +6,13 @@ var icon: Texture
 var time := 0.0
 @export var collectible: Collectible
 
-@onready var movement_component := $MovementComponent
-@onready var tracking_component := $TrackingComponent
-@onready var sprite := $Sprite2D
+@onready var movement_component: MovementComponent = $MovementComponent
+@onready var tracking_component: TrackingComponent = $TrackingComponent
+@onready var sprite: Sprite2D = $Sprite2D
 
-static func create_item(collectible: Collectible) -> GroundItem:
+static func create_item(c: Collectible) -> GroundItem:
 	var ground_item := GroundItem.new()
-	ground_item.collectible = collectible
+	ground_item.collectible = c
 	return ground_item
 	
 func _ready() -> void:
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	time += delta
 	sprite.position.y += sin(time * PI)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 func _on_inventory_full(type: InventoryManager, is_full: bool) -> void:
@@ -32,11 +32,11 @@ func _on_inventory_full(type: InventoryManager, is_full: bool) -> void:
 	
 func start_moving() -> void:
 	movement_component.set_speed(speed)
-	tracking_component.start_tracking = true
+	tracking_component.start_tracking()
 	
 func stop_moving() -> void:
 	movement_component.set_speed(0)
-	tracking_component.start_tracking = false
+	tracking_component.stop_tracking()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(&"Ally"):

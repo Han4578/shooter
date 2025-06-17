@@ -12,5 +12,5 @@ func _on_death() -> void:
 func take_damage(damage: float, attack_context: AttackContext) -> void:
 	damage_taken.emit(damage, attack_context)
 	
-func apply_effect(effect: Effect, attack_context: AttackContext) -> void:
+func apply_effect(effect: HitEffect, attack_context: AttackContext) -> void:
 	effect_applied.emit(effect, attack_context)

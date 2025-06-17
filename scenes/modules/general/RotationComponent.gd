@@ -1,4 +1,4 @@
-extends Node2D
+extends Component
 class_name RotationComponent
 
 @export var horizontal_only := false
@@ -9,7 +9,7 @@ class_name RotationComponent
 func _ready() -> void:
 	set_process(follow_mouse)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	look_at_mouse()
 			
 func look_at_mouse() -> void:
@@ -24,3 +24,9 @@ func change_rotation(direction: Vector2) -> void:
 	else:
 		sprite.global_rotation = direction.angle()
 		if direction.x != 0: sprite.scale.y = -1 if direction.x < 0 else 1
+		
+func start_following_mouse():
+	set_process(true)
+	
+func stop_following_mouse():
+	set_process(false)
