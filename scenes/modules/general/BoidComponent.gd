@@ -1,36 +1,27 @@
-extends Node2D
+extends Area2D
 class_name BoidComponent
 
 @export var movement_component: MovementComponent
-@export var radius := 10
-const factor := 5
+@export var moves_aside := true
 @onready var frame = Engine.get_physics_frames() % 5
-@onready var r2 := radius ** 2
 
+var current_v := Vector2.ZERO
+var final_v := Vector2.ZERO
 
-func _physics_process(delta: float) -> void:		
-	if Engine.get_physics_frames() % 5 == frame:
-		avoid_boids()
+func _physics_process(delta: float) -> void:	
+	if moves_aside and Engine.get_physics_frames() % 5 == frame: avoid_boids()
+		
+	if current_v.is_equal_approx(final_v): return
+	current_v = current_v.lerp(final_v, 0.3)
+	movement_component.set_boid_vector(current_v)
 
-#func avoid_boids() -> void:
-	#var direction := Vector2.ZERO
-	#var count := 0
-	#
-	#for area: Node2D in get_overlapping_areas():
-		#direction += area.global_position.direction_to(global_position) / global_position.distance_squared_to(area.global_position)
-		#count += 5
-	#
-	#movement_component.set_extra_vector(direction.normalized() * count)
-	
 func avoid_boids() -> void:
 	var direction := Vector2.ZERO
 	var count := 0
 	
-	for area: Node2D in HashGrid.get_area(HashGrid.Layers.BOID, global_position, radius):
-		if area == self: continue
-		var dist := global_position.distance_squared_to(area.global_position)
-		if dist > r2: continue
-		direction += area.global_position.direction_to(global_position) / dist
-		count += 5
+	for area: BoidComponent in get_overlapping_areas():
+		direction += area.global_position.direction_to(global_position) / global_position.distance_squared_to(area.global_position)
+		count += 1
 	
-	movement_component.set_extra_vector(direction.normalized() * count)
+	final_v = direction.normalized() * count * count
+	
