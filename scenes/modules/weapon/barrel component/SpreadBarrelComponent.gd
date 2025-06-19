@@ -9,7 +9,7 @@ class_name SpreadBarrelComponent
 signal trigger(target: TargetComponent, offset: float, attack_context: AttackContext)
 
 func _on_trigger(target: TargetComponent, offset: float, attack_context: AttackContext):
-	attack_context.extra[SpreadBarrelComponent] = true
+	attack_context.stat_upgrades.tags[SpreadBarrelComponent] = true
 	var total_projectile_count := projectile_count + attack_context.stat_upgrades.projectile_bonus + attack_context.stat_upgrades.spread_projectile_bonus
 	if even_spread:
 		if total_projectile_count <= 1: trigger.emit(target, offset) 

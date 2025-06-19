@@ -11,6 +11,6 @@ func process_event(clicked: bool, can_fire: bool, other_input_holding: bool, att
 		pull_trigger(attack_context) 
 		
 func pull_trigger(attack_context: AttackContext) -> void:
-		attack_context.stat_upgrades.attributes[SingleTriggerComponent] = true
+		attack_context.stat_upgrades.tags[SingleTriggerComponent] = true
 		trigger.emit(attack_context)
 		cd_start.emit(fire_rate)

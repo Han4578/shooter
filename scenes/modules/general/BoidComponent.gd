@@ -23,11 +23,13 @@ func _physics_process(delta: float) -> void:
 
 func avoid_boids() -> void:
 	var separation := Vector2.ZERO
+	var alignment := Vector2.ZERO
 	var count := 0
 	
 	for area: BoidComponent in get_overlapping_areas():
 		separation += max(0, 1 - (area.global_position.distance_squared_to(global_position) / radius)) * area.global_position.direction_to(global_position)
+		alignment += area.movement_component.direction
 		count += 1
 	
-	final_v = separation.limit_length(1) * 2
+	final_v = separation.limit_length(1) * 2 + alignment.limit_length(0.5)
 	

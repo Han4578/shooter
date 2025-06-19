@@ -19,8 +19,7 @@
 [ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/CooldownComponent.gd" id="16_t5rrw"]
 [ext_resource type="Script" path="res://scenes/modules/general/movement component/TrackingComponent.gd" id="17_quyey"]
 
-[sub_resource type="Resource" id="Resource_fi4ik"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_ho2xj"]
 script = ExtResource("5_ilnju")
 collision_effects = Array[ExtResource("3_316yk")]([])
 hit_effects = Array[ExtResource("4_vld6q")]([])
@@ -70,7 +69,7 @@ hit_effects = Array[ExtResource("4_vld6q")]([])
 z_index = 1
 position = Vector2(0, 25)
 script = ExtResource("5_gpns0")
-general_stat_upgrades = SubResource("Resource_fi4ik")
+general_stat_upgrades = SubResource("Resource_ho2xj")
 primary_trigger = NodePath("PrimaryTrigger")
 primary_stat_upgrades = SubResource("Resource_qb0rp")
 secondary_trigger = NodePath("SecondaryTrigger")
@@ -156,12 +155,10 @@ target = 2
 [connection signal="cd_start" from="PrimaryTrigger" to="PrimaryTrigger/Cooldown" method="start"]
 [connection signal="trigger" from="PrimaryTrigger" to="Sprite2D/PrimaryTarget" method="_on_trigger"]
 [connection signal="trigger" from="PrimaryTrigger/RapidBarrelComponent" to="PrimaryTrigger/FrontProjectileComponent" method="_on_trigger"]
-[connection signal="cd_end" from="PrimaryTrigger/Cooldown" to="." method="_on_cd_end"]
-[connection signal="timeout" from="PrimaryTrigger/Cooldown" to="PrimaryTrigger/Cooldown" method="_on_timeout"]
+[connection signal="cd_ended" from="PrimaryTrigger/Cooldown" to="." method="_on_cd_end"]
 [connection signal="trigger" from="SecondaryTrigger" to="Sprite2D/Line2D" method="_on_trigger_barrel" unbinds=1]
 [connection signal="cd_start" from="PassiveTrigger" to="." method="_on_cd_start"]
 [connection signal="cd_start" from="PassiveTrigger" to="PassiveTrigger/Cooldown" method="start"]
 [connection signal="trigger" from="PassiveTrigger" to="Sprite2D/PassiveTarget" method="_on_trigger"]
-[connection signal="cd_end" from="PassiveTrigger/Cooldown" to="." method="_on_passive_end" unbinds=1]
-[connection signal="timeout" from="PassiveTrigger/Cooldown" to="PassiveTrigger/Cooldown" method="_on_timeout"]
+[connection signal="cd_ended" from="PassiveTrigger/Cooldown" to="." method="_on_passive_end" unbinds=1]
 [connection signal="direction_changed" from="TrackingComponent" to="Sprite2D/RotationComponent" method="change_rotation"]

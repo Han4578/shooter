@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=9 format=3 uid="uid://n16cxb28okm"]
+
+[ext_resource type="Script" path="res://scenes/items/collectible/WeaponItem.gd" id="1_io7hl"]
+[ext_resource type="PackedScene" uid="uid://cfa1d7k1i77b0" path="res://scenes/items/item container/weapon/WeaponItemContainer.tscn" id="1_pom73"]
+[ext_resource type="Texture2D" uid="uid://bgqmkee0e150r" path="res://scenes/weapons/pistol/pistol.png" id="2_dxjjm"]
+[ext_resource type="Script" path="res://scenes/items/collectible/SkillDescription.gd" id="3_0ilc4"]
+[ext_resource type="PackedScene" uid="uid://cupsgy3wu68sd" path="res://scenes/weapons/pistol/pistol.tscn" id="5_yfn0s"]
+
+[sub_resource type="Resource" id="Resource_udaha"]
+script = ExtResource("3_0ilc4")
+name = &""
+cooldown = 0.0
+tags = Array[int]([])
+description = ""
+
+[sub_resource type="Resource" id="Resource_tsd5q"]
+script = ExtResource("3_0ilc4")
+name = &""
+cooldown = 0.0
+tags = Array[int]([])
+description = ""
+
+[sub_resource type="Resource" id="Resource_yy5oc"]
+script = ExtResource("3_0ilc4")
+name = &""
+cooldown = 0.0
+tags = Array[int]([])
+description = ""
+
+[resource]
+script = ExtResource("1_io7hl")
+name = &"Pistol"
+primary_skill = SubResource("Resource_tsd5q")
+secondary_skill = SubResource("Resource_yy5oc")
+passive_skill = SubResource("Resource_udaha")
+weapon_scene = ExtResource("5_yfn0s")
+container_scene = ExtResource("1_pom73")
+rarity = 0
+icon = ExtResource("2_dxjjm")

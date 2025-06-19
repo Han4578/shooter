@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=9 format=3 uid="uid://dkhjabsvagfe8"]
+
+[ext_resource type="Script" path="res://scenes/items/collectible/WeaponItem.gd" id="1_2t8nn"]
+[ext_resource type="PackedScene" uid="uid://cfa1d7k1i77b0" path="res://scenes/items/item container/weapon/WeaponItemContainer.tscn" id="1_7aksf"]
+[ext_resource type="Texture2D" uid="uid://bps66dhmhy2vs" path="res://scenes/weapons/pump action shotgun/pump action shotgun.png" id="2_tptki"]
+[ext_resource type="Script" path="res://scenes/items/collectible/SkillDescription.gd" id="3_8mcrk"]
+[ext_resource type="PackedScene" uid="uid://rbw5tb3laqe" path="res://scenes/weapons/pump action shotgun/shotgun.tscn" id="5_n0see"]
+
+[sub_resource type="Resource" id="Resource_tsxxq"]
+script = ExtResource("3_8mcrk")
+name = &""
+cooldown = 0.0
+tags = Array[int]([])
+description = ""
+
+[sub_resource type="Resource" id="Resource_hw8n8"]
+script = ExtResource("3_8mcrk")
+name = &""
+cooldown = 0.0
+tags = Array[int]([])
+description = ""
+
+[sub_resource type="Resource" id="Resource_fcefb"]
+script = ExtResource("3_8mcrk")
+name = &""
+cooldown = 0.0
+tags = Array[int]([])
+description = ""
+
+[resource]
+script = ExtResource("1_2t8nn")
+name = &"Pump Action Shotgun"
+primary_skill = SubResource("Resource_hw8n8")
+secondary_skill = SubResource("Resource_fcefb")
+passive_skill = SubResource("Resource_tsxxq")
+weapon_scene = ExtResource("5_n0see")
+container_scene = ExtResource("1_7aksf")
+rarity = 3
+icon = ExtResource("2_tptki")

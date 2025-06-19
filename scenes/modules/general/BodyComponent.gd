@@ -5,6 +5,7 @@ var stat_upgrades := StatUpgrades.new()
 @export var entity_type: Pooling.EntityTypes
 @export var stats_component: StatsComponent
 
+
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
 	

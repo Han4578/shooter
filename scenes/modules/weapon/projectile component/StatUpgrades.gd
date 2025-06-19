@@ -15,7 +15,7 @@ var hit_count_bonus := 0
 var damage_bonus := 0.0
 var crit_bonus := 0.0
 
-var attributes := {}
+var tags := {}
 var extra := {}
 
 @export var collision_effects: Array[CollisionEffect] = []
@@ -39,7 +39,7 @@ func add_to_stats(stat_upgrades: StatUpgrades) -> void:
 	collision_effects.append_array(stat_upgrades.collision_effects)
 	hit_effects.append_array(stat_upgrades.hit_effects)
 	
-	attributes.merge(stat_upgrades.attributes)
+	tags.merge(stat_upgrades.tags)
 	
 	for key in stat_upgrades.extra:
 		if key in extra: extra[key] += stat_upgrades.extra[key]

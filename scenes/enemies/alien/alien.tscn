@@ -62,6 +62,7 @@ speed = 200
 script = ExtResource("4_gavij")
 target = 1
 change_every_process = true
+track_every_frame = false
 
 [node name="KnockbackComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
 script = ExtResource("5_t446y")

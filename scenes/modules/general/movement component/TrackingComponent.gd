@@ -5,6 +5,7 @@ enum Target {PLAYER, ALLY, ENEMY}
 @export var target: Target
 @export var change_every_process := false
 @onready var frame := Engine.get_physics_frames() % 20
+@export var track_every_frame := true
 
 signal direction_changed(new_direction: Vector2)
 
@@ -12,7 +13,7 @@ func _ready() -> void:
 	set_process(change_every_process)
 
 func _physics_process(_delta: float) -> void:
-	if Engine.get_physics_frames() % 20 == frame:
+	if track_every_frame or Engine.get_physics_frames() % 20 == frame:
 		change_target()
 			
 func change_target():

@@ -7,17 +7,13 @@
 [node name="WeaponItemContainer" type="Control"]
 z_index = 1
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource("1_pospy")
@@ -40,7 +36,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 expand_mode = 3
-stretch_mode = 3
+stretch_mode = 5
 metadata/type = 0
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
