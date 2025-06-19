@@ -31,7 +31,7 @@ func _on_child_entered_tree(node: Node):
 		current_container.attachments[index] = node
 		node.details.upgrade.apply_to_weapon(current_container.content)
 
-func _on_child_exited_tree(node: Node): 
+func _on_child_exiting_tree(node: Node): 
 	if ignore_upgrade: return
 	if node is UpgradeItemContainer:
 		current_container.attachments[index] = null

@@ -14,7 +14,7 @@ func _ready() -> void:
 	content.cd_start.connect($ProgressBar._on_cd_start)
 
 func _gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"left_click"):
+	if event is InputEventMouseButton:
 		InventoryManager.open_weapon_details.emit(self)
 
 func start_process():

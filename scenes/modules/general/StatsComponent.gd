@@ -31,7 +31,7 @@ func reset_state() -> void:
 func _on_damage_taken(damage: float, _attack_context: AttackContext) -> void:		
 	damage = max(1, damage - total_defence)
 	
-	ParticleGenerator.display_damage(round(damage), global_position)
+	NumberGenerator.output_number(global_position, round(damage))
 	var remaining_health := total_health * current_health_percentage - damage
 	if remaining_health <= 0:
 		death.emit()

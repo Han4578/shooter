@@ -1,4 +1,4 @@
-extends Node2D
+extends Marker2D
 class_name TargetComponent
 
 enum FromTargetType {MOUSE, TARGET, PLAYER, CLOSEST_ENEMY} 

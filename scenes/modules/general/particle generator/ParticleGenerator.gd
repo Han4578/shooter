@@ -1,17 +1,12 @@
 extends GPUParticles2D
 class_name ParticleGenerator
 
-static var damage_number_scene := preload("./DamageNumber.tscn")
 static var throwable_scene := preload("./Throwable.tscn")
+static var particle_layer: Node2D
 
-static func display_damage(dmg: float, pos: Vector2):
-	var particle : ParticleGenerator = damage_number_scene.instantiate()
-	particle.global_position = pos
-	particle.get_node("SubViewport/Label").text = str(round(dmg))
-	Global.map.add_child(particle)
-	
+
 static func display_throwable(from: Vector2, to: Vector2, txt: Texture):
-	var particle : ParticleGenerator = throwable_scene.instantiate()
+	var particle : ParticleGenerator = Pooling.get_entity(throwable_scene)
 	particle.texture = txt
 	particle.global_position = from
 	var time := particle.lifetime
@@ -20,10 +15,12 @@ static func display_throwable(from: Vector2, to: Vector2, txt: Texture):
 	var vec := Vector2(dx, dy)
 	particle.process_material.set_shader_parameter("initial_velocity", vec)
 	particle.process_material.set_shader_parameter("initial_position", from)
-	Global.map.add_child(particle)
+	particle_layer.add_child(particle)
 	
-func _ready() -> void:
+	
+func _enter_tree() -> void:
 	restart()
-	await get_tree().create_timer(lifetime).timeout
-	queue_free()
+	await finished
+	get_parent().remove_child(self)
+	Pooling.return_entity(self)
 	

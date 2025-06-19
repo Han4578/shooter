@@ -91,11 +91,12 @@ width = 2.0
 default_color = Color(1, 0, 0, 1)
 script = ExtResource("7_mf24n")
 
-[node name="PrimaryTarget" type="Node2D" parent="Sprite2D"]
+[node name="PrimaryTarget" type="Marker2D" parent="Sprite2D"]
 position = Vector2(25, -13)
 script = ExtResource("8_qxmjp")
 
-[node name="PassiveTarget" type="Node2D" parent="Sprite2D"]
+[node name="PassiveTarget" type="Marker2D" parent="Sprite2D"]
+position = Vector2(25, -13)
 script = ExtResource("8_qxmjp")
 target_to = 4
 

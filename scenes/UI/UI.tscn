@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/UI/pause menu/pause_menu.gd" id="1_wr63j"]
 [ext_resource type="Script" path="res://scenes/UI/health bar/health_bar.gd" id="2_2jrrv"]
 [ext_resource type="Texture2D" uid="uid://btvw70eb25gky" path="res://scenes/UI/inventory/weapon slot/weapon_slot_selected_64.png" id="2_gqao0"]
-[ext_resource type="Script" path="res://scenes/UI/inventory/weapon slot/weapon_container.gd" id="3_8st8j"]
+[ext_resource type="Script" path="res://scenes/UI/inventory/weapon slot/weapon_slot_bar.gd" id="3_8st8j"]
 [ext_resource type="Texture2D" uid="uid://b7qf0upv6ungc" path="res://scenes/UI/inventory/weapon slot/weapon_slot_selected.png" id="3_62kr2"]
 [ext_resource type="Texture2D" uid="uid://dj2enj0glib8d" path="res://scenes/UI/health bar/health progress.png" id="4_h7kke"]
 [ext_resource type="Texture2D" uid="uid://b1q0ew1xcchg5" path="res://scenes/UI/pause menu/pause_menu_texture.png" id="5_34aym"]
