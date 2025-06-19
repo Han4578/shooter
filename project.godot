@@ -42,14 +42,6 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray()
 
-[global_group]
-
-Enemy=""
-Ally=""
-WeaponSlot=""
-ChipSlot=""
-AttachmentSlot=""
-
 [gui]
 
 theme/custom_font="res://scenes/UI/Minecraft.ttf"

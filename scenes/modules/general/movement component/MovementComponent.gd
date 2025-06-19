@@ -8,6 +8,12 @@ var boid_vector:= Vector2.ZERO
 
 signal velocity_changed(new_velocity: Vector2)
 
+func reset_state() -> void:
+	direction = Vector2.ZERO
+	knockback_vector = Vector2.ZERO
+	boid_vector = Vector2.ZERO
+	change_velocity()
+
 func change_velocity():
 	velocity_changed.emit((direction + boid_vector).normalized() * speed + knockback_vector)
 	

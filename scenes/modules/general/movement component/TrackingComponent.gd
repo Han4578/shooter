@@ -5,7 +5,6 @@ enum Target {PLAYER, ALLY, ENEMY}
 @export var target: Target
 @export var change_every_process := false
 @onready var frame := Engine.get_physics_frames() % 20
-@onready var tree: SceneTree = get_tree()
 
 signal direction_changed(new_direction: Vector2)
 
@@ -21,14 +20,14 @@ func change_target():
 			Target.PLAYER: 
 				direction_changed.emit(global_position.direction_to(Global.player.global_position))
 			Target.ALLY:
-				direction_changed.emit(global_position.direction_to(find_closest(&"Ally").global_position))
+				direction_changed.emit(global_position.direction_to(find_closest(Pooling.EntityTypes.ALLY).global_position))
 			Target.ENEMY:
-				direction_changed.emit(global_position.direction_to(find_closest(&"Enemy").global_position))
+				direction_changed.emit(global_position.direction_to(find_closest(Pooling.EntityTypes.ENEMY).global_position))
 				
-func find_closest(group_name: StringName) -> Node2D:
+func find_closest(entity_type: Pooling.EntityTypes) -> Node2D:
 	var closest : Node2D = self
 	var dist := INF
-	for entity: Node2D in tree.get_nodes_in_group(group_name):
+	for entity: Node2D in Pooling.entities[entity_type]:
 		var d := global_position.distance_squared_to(entity.global_position)
 		if d < dist: 
 			closest = entity

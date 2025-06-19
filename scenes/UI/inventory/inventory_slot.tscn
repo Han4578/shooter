@@ -10,6 +10,3 @@ offset_bottom = 72.0
 mouse_filter = 1
 color = Color(1, 1, 1, 0.486275)
 script = ExtResource("1_ikgpu")
-
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

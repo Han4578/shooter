@@ -6,6 +6,7 @@ var current_container: WeaponItemContainer
 var ignore_upgrade := false
 
 func _ready() -> void:
+	super()
 	InventoryManager.open_weapon_details.connect(_on_open_weapon_details)
 	InventoryManager.close_weapon_details.connect(close_weapon_details)
 	

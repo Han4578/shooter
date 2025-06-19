@@ -34,5 +34,8 @@ func _on_area_entered(area: Area2D) -> void:
 	if not one_shot:
 		await get_tree().create_timer(tick_speed).timeout
 		if is_instance_valid(area) and overlaps_area(area): _on_area_entered(area)
-	
+		
+func reset_state() -> void:
+	attack_context = null
+	can_collide = true	
 	

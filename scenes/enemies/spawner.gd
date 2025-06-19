@@ -1,6 +1,6 @@
 extends Node2D
 
-var radius : int = 1000	
+var radius : int = 1500	
 var radius2 : int = radius ** 2
 
 
@@ -18,6 +18,7 @@ func spawn_alien():
 	var alien := Pooling.get_entity(alien_scene)
 	alien.position = Vector2(x, y)
 	add_sibling(alien)
+	
 	
 #var count := 0
 #func _physics_process(delta: float) -> void:

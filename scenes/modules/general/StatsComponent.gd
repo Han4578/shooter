@@ -25,6 +25,9 @@ func _ready() -> void:
 	update_total_attack()
 	update_total_health()
 	
+func reset_state() -> void: 
+	current_health_percentage = 1.0
+	
 func _on_damage_taken(damage: float, _attack_context: AttackContext) -> void:		
 	damage = max(1, damage - total_defence)
 	

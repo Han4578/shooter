@@ -2,6 +2,7 @@ extends ItemSlot
 class_name InventorySlot
 
 func _ready() -> void:
+	super()
 	InventoryManager.inventory[type].append(self)
 	
 func _on_child_entered_tree(node: Node) -> void:

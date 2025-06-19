@@ -8,6 +8,7 @@ var projectile_bonus := 0
 var spread_projectile_bonus := 0
 var rapid_projectile_bonus := 0
 var radius_bonus := 0.0
+var hit_count_bonus := 0
 #Future
 #var base_damage_bonus_percentage := 0.0
 #var base_damage_bonus_flat:= 0
@@ -31,6 +32,7 @@ func add_to_stats(stat_upgrades: StatUpgrades) -> void:
 	projectile_bonus += stat_upgrades.projectile_bonus
 	spread_projectile_bonus += stat_upgrades.spread_projectile_bonus
 	rapid_projectile_bonus += stat_upgrades.rapid_projectile_bonus
+	hit_count_bonus += stat_upgrades.hit_count_bonus
 	damage_bonus += stat_upgrades.damage_bonus
 	crit_bonus += stat_upgrades.crit_bonus
 	

@@ -19,6 +19,7 @@ func _gui_input(event: InputEvent) -> void:
 		InventoryManager.change_passive(index)
 		change_passive()
 		
+		
 func _on_child_entered_tree(node: Node) -> void:
 	if (node is WeaponItemContainer):
 		super(node)

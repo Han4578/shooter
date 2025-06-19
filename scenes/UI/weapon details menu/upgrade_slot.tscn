@@ -17,6 +17,3 @@ grow_vertical = 0
 color = Color(1, 1, 1, 0.486275)
 script = ExtResource("1_jtqv1")
 type = 2
-
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="child_exiting_tree" from="." to="." method="_on_child_exited_tree"]

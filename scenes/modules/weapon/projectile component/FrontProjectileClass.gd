@@ -4,14 +4,15 @@ class_name FrontProjectile
 @export var despawn_time := 1.5
 @export var movement_component: MovementComponent
 @export var collision_component: CollisionBoxComponent
-var attack_context: AttackContext
+@export var timer: Timer
 var velocity := Vector2.ZERO
-var hit_count := 1
-
-func _ready() -> void:
-	await get_tree().create_timer(despawn_time, false).timeout
-	Pooling.return_entity(self)
+var initial_hit_count := 1
+var hit_count: int
 	
+func _enter_tree() -> void:
+	timer.wait_time = despawn_time
+	timer.call_deferred(&"start")
+
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
 	
@@ -22,6 +23,7 @@ func load_details(pos: Vector2, rot: float, despawn: float, speed: int, atk_cont
 	movement_component.set_speed(speed)
 	collision_component.attack_context = atk_context
 	$Sprite2D.global_rotation = rot
+	hit_count = initial_hit_count + atk_context.stat_upgrades.hit_count_bonus
 	
 func _on_velocity_changed(new_velocity: Vector2) -> void:
 	velocity = new_velocity
@@ -29,4 +31,16 @@ func _on_velocity_changed(new_velocity: Vector2) -> void:
 func _on_area_collided() -> void:
 	hit_count -= 1
 	if hit_count == 0: collision_component.can_collide = false
+	call_deferred(&"return_to_pool")
+	
+func return_to_pool():
+	get_parent().remove_child(self)
 	Pooling.return_entity(self)
+	reset_state()
+	
+func reset_state() -> void:
+	hit_count = initial_hit_count
+	timer.stop()
+	movement_component.reset_state()
+	collision_component.reset_state()
+	

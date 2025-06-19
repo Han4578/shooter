@@ -1,9 +1,13 @@
 extends Node
 
+enum EntityTypes {ALLY = 0, ENEMY = 1}
+
+var entities := [{}, {}]
+
 var pool := {}
 
 func get_entity(scene: PackedScene) -> Node2D:
-	if scene.resource_path in pool and pool[scene.resource_path].size() > 0: return pool[scene.resource_path].pop()
+	if scene.resource_path in pool and not pool[scene.resource_path].is_empty(): return pool[scene.resource_path].pop_back()
 	else: return scene.instantiate()
 	
 func return_entity(node: Node2D):
