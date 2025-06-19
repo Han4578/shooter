@@ -20,7 +20,7 @@ size = Vector2(60, 44)
 [sub_resource type="CircleShape2D" id="CircleShape2D_u2l37"]
 radius = 100.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stats_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stats_component") groups=["Ally"]]
 collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_d5d2x")
