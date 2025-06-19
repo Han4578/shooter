@@ -5,6 +5,7 @@ class_name RotationComponent
 @export var follow_mouse := false
 
 @export var sprite: Sprite2D
+@export var center: Node2D = self
 
 func _ready() -> void:
 	set_process(follow_mouse)
@@ -15,7 +16,7 @@ func _process(_delta: float) -> void:
 func look_at_mouse() -> void:
 	var mouse_pos := get_global_mouse_position()
 	sprite.global_rotation = global_position.angle_to_point(mouse_pos)
-	sprite.scale.y = 1 if (mouse_pos > global_position) else -1
+	sprite.scale.y = 1 if (mouse_pos.x > center.global_position.x) else -1
 	
 func change_rotation(direction: Vector2) -> void:
 	if direction == Vector2.ZERO: return

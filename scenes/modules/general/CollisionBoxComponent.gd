@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 	attack_context = null
 
 func _on_area_entered(area: Area2D) -> void:
-	if not (area is HitBoxComponent and can_collide): return
+	if not (area is HitBoxComponent and can_collide and area.can_collide): return
 	if not attack_context: 
 		attack_context_requested.emit(self)
 		attack_context.stat_upgrades.add_effects(collision_effects, hit_effects)

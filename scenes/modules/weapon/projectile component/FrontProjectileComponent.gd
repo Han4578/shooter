@@ -7,7 +7,7 @@ class_name FrontProjectileComponent
 var weapon : Node2D
 
 func _on_trigger(target: TargetComponent, offset: float, attack_context: AttackContext):
-	var projectile_instance : FrontProjectile = projectile.instantiate()
+	var projectile_instance : FrontProjectile = Pooling.get_entity(projectile)
 	projectile_instance.load_details(target.get_target_from_position(), target.get_target_to_direction() + offset, despawn_time, movement_speed, attack_context)
 	
 	Global.map.add_child(projectile_instance)

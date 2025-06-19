@@ -5,6 +5,7 @@ enum Target {PLAYER, ALLY, ENEMY}
 @export var target: Target
 @export var change_every_process := false
 @onready var frame := Engine.get_physics_frames() % 20
+@onready var tree: SceneTree = get_tree()
 
 signal direction_changed(new_direction: Vector2)
 
@@ -27,7 +28,7 @@ func change_target():
 func find_closest(group_name: StringName) -> Node2D:
 	var closest : Node2D = self
 	var dist := INF
-	for entity: Node2D in get_tree().get_nodes_in_group(group_name):
+	for entity: Node2D in tree.get_nodes_in_group(group_name):
 		var d := global_position.distance_squared_to(entity.global_position)
 		if d < dist: 
 			closest = entity

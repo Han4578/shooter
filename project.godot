@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://singletons/global.gd"
 InventoryManager="*res://singletons/InventoryManager.gd"
+Pooling="*res://singletons/Pooling.gd"
 
 [debug]
 

@@ -12,7 +12,8 @@ func _on_velocity_changed(new_velocity: Vector2):
 	velocity = new_velocity
 
 func _on_death() -> void:
-	queue_free()
+	get_parent().remove_child(self)
+	Pooling.return_entity(self)
 
 func create_attack_context() -> AttackContext:
 	var attack_context := AttackContext.new()

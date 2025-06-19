@@ -10,7 +10,7 @@ var hit_count := 1
 
 func _ready() -> void:
 	await get_tree().create_timer(despawn_time, false).timeout
-	queue_free()
+	Pooling.return_entity(self)
 	
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
@@ -29,4 +29,4 @@ func _on_velocity_changed(new_velocity: Vector2) -> void:
 func _on_area_collided() -> void:
 	hit_count -= 1
 	if hit_count == 0: collision_component.can_collide = false
-	queue_free()
+	Pooling.return_entity(self)

@@ -99,11 +99,12 @@ script = ExtResource("8_qxmjp")
 script = ExtResource("8_qxmjp")
 target_to = 4
 
-[node name="RotationComponent" type="Node2D" parent="Sprite2D" node_paths=PackedStringArray("sprite")]
+[node name="RotationComponent" type="Node2D" parent="Sprite2D" node_paths=PackedStringArray("sprite", "center")]
 position = Vector2(25, -13)
 script = ExtResource("15_u08ad")
 follow_mouse = true
 sprite = NodePath("..")
+center = NodePath("../..")
 
 [node name="PrimaryTrigger" type="Node2D" parent="."]
 script = ExtResource("7_b1eai")

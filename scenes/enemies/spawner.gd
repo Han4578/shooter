@@ -15,6 +15,13 @@ func _on_timer_timeout() -> void:
 func spawn_alien():
 	var x : float = randf_range(-radius, radius) + Global.player.position.x
 	var y = calc_pos(x)
-	var alien = alien_scene.instantiate()
+	var alien := Pooling.get_entity(alien_scene)
 	alien.position = Vector2(x, y)
 	add_sibling(alien)
+	
+#var count := 0
+#func _physics_process(delta: float) -> void:
+	#spawn_alien()
+	#count += 1
+	#if count == 600: set_physics_process(false)
+	

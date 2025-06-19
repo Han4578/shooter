@@ -12,7 +12,7 @@ func _init() -> void:
 	explosion_circle.shape = CircleShape2D.new()
 
 func apply(hitbox: HitBoxComponent, attack_context: AttackContext) -> void:
-	explosion_circle.collision_mask = 2 if attack_context.owner.is_in_group(&"Ally") else 1
+	explosion_circle.collision_mask = 2
 	explosion_circle.shape.radius =  40 + 50 * explosion_level * (1 + attack_context.stat_upgrades.radius_bonus)
 	explosion_circle.transform.origin = hitbox.global_position
 
