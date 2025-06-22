@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://hm81apye5aii"]
 
-[ext_resource type="Script" path="res://attachments/glove in a box/upgrade.gd" id="1_77oam"]
+[ext_resource type="Script" uid="uid://brs8fggqmhmo2" path="res://attachments/glove in a box/upgrade.gd" id="1_77oam"]
 [ext_resource type="Resource" uid="uid://yj3iavhs0eqe" path="res://attachments/glove in a box/knockback_hit_effect.tres" id="1_a5se2"]
 
 [resource]

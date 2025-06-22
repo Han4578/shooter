@@ -1,8 +1,8 @@
 extends Node
 
-enum EntityTypes {ALLY = 0, ENEMY = 1}
+enum EntityTypes {ALLY = 0, ENEMY = 1, BOID = 2}
 
-var entities := [{}, {}]
+var entities: Array[Dictionary] = [{}, {}, {}]
 
 var pool := {}
 

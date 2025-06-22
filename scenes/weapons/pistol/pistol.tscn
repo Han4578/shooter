@@ -1,23 +1,23 @@
 [gd_scene load_steps=27 format=3 uid="uid://cupsgy3wu68sd"]
 
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/CollisionEffect.gd" id="3_316yk"]
+[ext_resource type="Script" uid="uid://1dv1tes03aak" path="res://scenes/modules/weapon/projectile effects/collision effects/CollisionEffect.gd" id="3_316yk"]
 [ext_resource type="Texture2D" uid="uid://bgqmkee0e150r" path="res://scenes/weapons/pistol/pistol.png" id="3_ospr8"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/hit effects/HitEffect.gd" id="4_vld6q"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/ScalingParameter.gd" id="4_xuudt"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/SingleDamageEffect.gd" id="5_c7udh"]
-[ext_resource type="Script" path="res://scenes/weapons/weapon_class.gd" id="5_gpns0"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/StatUpgrades.gd" id="5_ilnju"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/AreaDamageEffect.gd" id="7_ap2pc"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/SingleTriggerComponent.gd" id="7_b1eai"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/barrel component/RapidBarrelComponent.gd" id="7_fhmtu"]
-[ext_resource type="Script" path="res://scenes/weapons/pistol/line_2d.gd" id="7_mf24n"]
+[ext_resource type="Script" uid="uid://bixkdo6udjgn6" path="res://scenes/modules/weapon/projectile effects/hit effects/HitEffect.gd" id="4_vld6q"]
+[ext_resource type="Script" uid="uid://cr8r16peu8vhf" path="res://scenes/modules/weapon/projectile component/ScalingParameter.gd" id="4_xuudt"]
+[ext_resource type="Script" uid="uid://c7e6peq66gy0k" path="res://scenes/modules/weapon/projectile effects/collision effects/SingleDamageEffect.gd" id="5_c7udh"]
+[ext_resource type="Script" uid="uid://cis2khbgefsxy" path="res://scenes/weapons/weapon_class.gd" id="5_gpns0"]
+[ext_resource type="Script" uid="uid://cdmmxmxtgjs1k" path="res://scenes/modules/weapon/projectile component/StatUpgrades.gd" id="5_ilnju"]
+[ext_resource type="Script" uid="uid://cs5nfq1p78mev" path="res://scenes/modules/weapon/projectile effects/collision effects/AreaDamageEffect.gd" id="7_ap2pc"]
+[ext_resource type="Script" uid="uid://xpsfb5rv0rjv" path="res://scenes/modules/weapon/trigger component/SingleTriggerComponent.gd" id="7_b1eai"]
+[ext_resource type="Script" uid="uid://lw7dri808n41" path="res://scenes/modules/weapon/barrel component/RapidBarrelComponent.gd" id="7_fhmtu"]
+[ext_resource type="Script" uid="uid://cnq3o4wtmlks" path="res://scenes/weapons/pistol/line_2d.gd" id="7_mf24n"]
 [ext_resource type="PackedScene" uid="uid://bffo61oboxv55" path="res://scenes/weapons/projectile/bullet.tscn" id="8_atxs2"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/target component/TargetComponent.gd" id="8_qxmjp"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/FrontProjectileComponent.gd" id="8_x3l8v"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/StateChangeTriggerComponent.gd" id="15_pj5by"]
-[ext_resource type="Script" path="res://scenes/modules/general/RotationComponent.gd" id="15_u08ad"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/trigger component/CooldownComponent.gd" id="16_t5rrw"]
-[ext_resource type="Script" path="res://scenes/modules/general/movement component/TrackingComponent.gd" id="17_quyey"]
+[ext_resource type="Script" uid="uid://bxq7c2k1qscoa" path="res://scenes/modules/weapon/target component/TargetComponent.gd" id="8_qxmjp"]
+[ext_resource type="Script" uid="uid://necbkodwlo2i" path="res://scenes/modules/weapon/projectile component/FrontProjectileComponent.gd" id="8_x3l8v"]
+[ext_resource type="Script" uid="uid://bcldccsugr6sf" path="res://scenes/modules/weapon/trigger component/StateChangeTriggerComponent.gd" id="15_pj5by"]
+[ext_resource type="Script" uid="uid://b86xcg7pffs01" path="res://scenes/modules/general/RotationComponent.gd" id="15_u08ad"]
+[ext_resource type="Script" uid="uid://lcqtyymagwdc" path="res://scenes/modules/weapon/trigger component/CooldownComponent.gd" id="16_t5rrw"]
+[ext_resource type="Script" uid="uid://bvs746kb650us" path="res://scenes/modules/general/movement component/TrackingComponent.gd" id="17_quyey"]
 
 [sub_resource type="Resource" id="Resource_ho2xj"]
 script = ExtResource("5_ilnju")
@@ -83,18 +83,13 @@ texture = ExtResource("3_ospr8")
 offset = Vector2(12, -6)
 
 [node name="Line2D" type="Line2D" parent="Sprite2D"]
-visible = false
 position = Vector2(28, -13)
 points = PackedVector2Array(0, 0, 1000, 0)
 width = 2.0
 default_color = Color(1, 0, 0, 1)
 script = ExtResource("7_mf24n")
 
-[node name="PrimaryTarget" type="Marker2D" parent="Sprite2D"]
-position = Vector2(25, -13)
-script = ExtResource("8_qxmjp")
-
-[node name="PassiveTarget" type="Marker2D" parent="Sprite2D"]
+[node name="TargetComponent" type="Marker2D" parent="Sprite2D"]
 position = Vector2(25, -13)
 script = ExtResource("8_qxmjp")
 target_to = 4
@@ -149,16 +144,15 @@ target = 2
 [connection signal="passive_ended" from="." to="TrackingComponent" method="stop_tracking"]
 [connection signal="passive_started" from="." to="Sprite2D/RotationComponent" method="stop_following_mouse"]
 [connection signal="passive_started" from="." to="TrackingComponent" method="start_tracking"]
-[connection signal="target_direction" from="Sprite2D/PrimaryTarget" to="PrimaryTrigger/RapidBarrelComponent" method="_on_trigger"]
-[connection signal="target_direction" from="Sprite2D/PassiveTarget" to="PrimaryTrigger/RapidBarrelComponent" method="_on_trigger"]
+[connection signal="target_direction" from="Sprite2D/TargetComponent" to="PrimaryTrigger/RapidBarrelComponent" method="_on_trigger"]
 [connection signal="cd_start" from="PrimaryTrigger" to="." method="_on_cd_start"]
 [connection signal="cd_start" from="PrimaryTrigger" to="PrimaryTrigger/Cooldown" method="start"]
-[connection signal="trigger" from="PrimaryTrigger" to="Sprite2D/PrimaryTarget" method="_on_trigger"]
+[connection signal="trigger" from="PrimaryTrigger" to="Sprite2D/TargetComponent" method="_on_trigger"]
 [connection signal="trigger" from="PrimaryTrigger/RapidBarrelComponent" to="PrimaryTrigger/FrontProjectileComponent" method="_on_trigger"]
 [connection signal="cd_ended" from="PrimaryTrigger/Cooldown" to="." method="_on_cd_end"]
 [connection signal="trigger" from="SecondaryTrigger" to="Sprite2D/Line2D" method="_on_trigger_barrel" unbinds=1]
 [connection signal="cd_start" from="PassiveTrigger" to="." method="_on_cd_start"]
 [connection signal="cd_start" from="PassiveTrigger" to="PassiveTrigger/Cooldown" method="start"]
-[connection signal="trigger" from="PassiveTrigger" to="Sprite2D/PassiveTarget" method="_on_trigger"]
+[connection signal="trigger" from="PassiveTrigger" to="Sprite2D/TargetComponent" method="_on_trigger"]
 [connection signal="cd_ended" from="PassiveTrigger/Cooldown" to="." method="_on_passive_end" unbinds=1]
 [connection signal="direction_changed" from="TrackingComponent" to="Sprite2D/RotationComponent" method="change_rotation"]

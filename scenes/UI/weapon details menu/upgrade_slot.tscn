@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bx6koh5if118m"]
 
-[ext_resource type="Script" path="res://scenes/UI/weapon details menu/UpgradeSlot.gd" id="1_jtqv1"]
+[ext_resource type="Script" uid="uid://0ycnjfwxvir8" path="res://scenes/UI/weapon details menu/UpgradeSlot.gd" id="1_jtqv1"]
 
 [node name="ChipSlot" type="ColorRect"]
 custom_minimum_size = Vector2(80, 80)

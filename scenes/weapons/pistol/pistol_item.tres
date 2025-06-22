@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="WeaponItem" load_steps=9 format=3 uid="uid://n16cxb28okm"]
 
-[ext_resource type="Script" path="res://scenes/items/collectible/WeaponItem.gd" id="1_io7hl"]
+[ext_resource type="Script" uid="uid://on16f5mbki72" path="res://scenes/items/collectible/WeaponItem.gd" id="1_io7hl"]
 [ext_resource type="PackedScene" uid="uid://cfa1d7k1i77b0" path="res://scenes/items/item container/weapon/WeaponItemContainer.tscn" id="1_pom73"]
 [ext_resource type="Texture2D" uid="uid://bgqmkee0e150r" path="res://scenes/weapons/pistol/pistol.png" id="2_dxjjm"]
-[ext_resource type="Script" path="res://scenes/items/collectible/SkillDescription.gd" id="3_0ilc4"]
+[ext_resource type="Script" uid="uid://dap783ufdfo4j" path="res://scenes/items/collectible/SkillDescription.gd" id="3_0ilc4"]
 [ext_resource type="PackedScene" uid="uid://cupsgy3wu68sd" path="res://scenes/weapons/pistol/pistol.tscn" id="5_yfn0s"]
 
 [sub_resource type="Resource" id="Resource_udaha"]

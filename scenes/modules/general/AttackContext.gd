@@ -4,7 +4,7 @@ class_name AttackContext
 var attack: float
 var defence: float
 var max_health: float
-var owner: BodyComponent
+var owner: Node2D
 var owner_position: Vector2
 var collision_position: Vector2
 var weapon: Weapon

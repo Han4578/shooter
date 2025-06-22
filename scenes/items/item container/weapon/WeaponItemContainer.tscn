@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfa1d7k1i77b0"]
 
-[ext_resource type="Script" path="res://scenes/items/item container/weapon/WeaponItemContainer.gd" id="1_pospy"]
+[ext_resource type="Script" uid="uid://clkxuhxgj17ws" path="res://scenes/items/item container/weapon/WeaponItemContainer.gd" id="1_pospy"]
 [ext_resource type="Texture2D" uid="uid://clfs1m0c2g7xr" path="res://scenes/UI/inventory/weapon slot/weapon_cd_under.png" id="2_dtiea"]
-[ext_resource type="Script" path="res://scenes/items/item container/weapon/reload_circle.gd" id="3_4da15"]
+[ext_resource type="Script" uid="uid://cwreyln823syh" path="res://scenes/items/item container/weapon/reload_circle.gd" id="3_4da15"]
 
 [node name="WeaponItemContainer" type="Control"]
 z_index = 1

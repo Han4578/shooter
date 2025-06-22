@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="KnockbackHitEffect" load_steps=2 format=3 uid="uid://yj3iavhs0eqe"]
 
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/hit effects/KnockbackHitEffect.gd" id="1_v5fhr"]
+[ext_resource type="Script" uid="uid://dxtj52n3ocoax" path="res://scenes/modules/weapon/projectile effects/hit effects/KnockbackHitEffect.gd" id="1_v5fhr"]
 
 [resource]
 script = ExtResource("1_v5fhr")

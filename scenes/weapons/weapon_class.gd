@@ -1,7 +1,7 @@
 extends Node2D
 class_name Weapon
 
-var current_owner: BodyComponent
+var current_owner: Node2D
 var can_fire := true
 var holding := 0
 var is_passive := false
@@ -75,7 +75,7 @@ func stop_passive() -> void:
 	
 func passive_fire() -> void:
 	can_fire = false
-	var attack_context := current_owner.create_attack_context()
+	var attack_context :AttackContext= current_owner.create_attack_context()
 	attack_context.weapon = self
 	attack_context.stat_upgrades.add_to_stats(general_stat_upgrades)
 	attack_context.stat_upgrades.add_to_stats(passive_stat_upgrades)

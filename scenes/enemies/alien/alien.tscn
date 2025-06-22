@@ -1,53 +1,20 @@
-[gd_scene load_steps=20 format=3 uid="uid://btoocuprax4oj"]
+[gd_scene load_steps=10 format=3 uid="uid://btoocuprax4oj"]
 
-[ext_resource type="Script" path="res://scenes/modules/general/BodyComponent.gd" id="1_bksu2"]
+[ext_resource type="Script" uid="uid://dbpya3cdrkupi" path="res://scenes/modules/general/BodyComponent.gd" id="1_bksu2"]
 [ext_resource type="Texture2D" uid="uid://d3gltw4bfbp7c" path="res://sprites/alien.png" id="2_ro1ih"]
-[ext_resource type="Script" path="res://scenes/modules/general/StatsComponent.gd" id="2_yyjhs"]
-[ext_resource type="Script" path="res://scenes/modules/general/HitBoxComponent.gd" id="3_h0avi"]
-[ext_resource type="Script" path="res://scenes/modules/general/movement component/MovementComponent.gd" id="3_rthbm"]
-[ext_resource type="Script" path="res://scenes/modules/general/movement component/TrackingComponent.gd" id="4_gavij"]
-[ext_resource type="Script" path="res://scenes/modules/general/movement component/knockback_component.gd" id="5_t446y"]
-[ext_resource type="Script" path="res://scenes/modules/general/CollisionBoxComponent.gd" id="8_6hbdw"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/CollisionEffect.gd" id="9_ojcfy"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/ScalingParameter.gd" id="10_k056m"]
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile effects/collision effects/SingleDamageEffect.gd" id="11_5mkqy"]
-[ext_resource type="Script" path="res://scenes/modules/general/RotationComponent.gd" id="12_3aguo"]
-[ext_resource type="Script" path="res://scenes/modules/general/EffectComponent.gd" id="13_f1575"]
-[ext_resource type="Script" path="res://scenes/modules/general/BoidComponent.gd" id="14_f4pso"]
+[ext_resource type="Script" uid="uid://dhv5ctu3yg1cl" path="res://scenes/modules/general/StatsComponent.gd" id="2_yyjhs"]
+[ext_resource type="Script" uid="uid://by2rvbeoqg700" path="res://scenes/modules/general/movement component/MovementComponent.gd" id="3_rthbm"]
+[ext_resource type="Script" uid="uid://bvs746kb650us" path="res://scenes/modules/general/movement component/TrackingComponent.gd" id="4_gavij"]
+[ext_resource type="Script" uid="uid://c4qbxa54svf24" path="res://scenes/modules/general/movement component/knockback_component.gd" id="5_t446y"]
+[ext_resource type="Script" uid="uid://b86xcg7pffs01" path="res://scenes/modules/general/RotationComponent.gd" id="12_3aguo"]
+[ext_resource type="Script" uid="uid://brxf07dp7pdpp" path="res://scenes/modules/general/EffectComponent.gd" id="13_f1575"]
+[ext_resource type="Script" uid="uid://cyrp00qrr6jiv" path="res://scenes/modules/general/BoidComponent.gd" id="15_gnegw"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qu6qv"]
-radius = 30.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcpv3"]
-size = Vector2(80, 84)
-
-[sub_resource type="Resource" id="Resource_j5c6p"]
-script = ExtResource("10_k056m")
-parameter = 0
-scaling = 1.0
-flat_amount = 0
-
-[sub_resource type="Resource" id="Resource_ejl58"]
-script = ExtResource("11_5mkqy")
-parameter = SubResource("Resource_j5c6p")
-priority = 0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_n5msg"]
-radius = 60.0
-
-[node name="Alien" type="CharacterBody2D" node_paths=PackedStringArray("stats_component") groups=["Enemy"]]
+[node name="Alien" type="Node2D" node_paths=PackedStringArray("stats_component") groups=["Enemy"]]
 z_index = 1
-collision_layer = 2
-collision_mask = 0
-motion_mode = 1
-slide_on_ceiling = false
 script = ExtResource("1_bksu2")
 entity_type = 1
 stats_component = NodePath("StatsComponent")
-
-[node name="SqueezeBox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 42)
-shape = SubResource("CircleShape2D_qu6qv")
 
 [node name="StatsComponent" type="Node2D" parent="."]
 script = ExtResource("2_yyjhs")
@@ -71,27 +38,6 @@ movement_component = NodePath("../MovementComponent")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ro1ih")
 
-[node name="HitBoxComponent" type="Area2D" parent="."]
-collision_layer = 2
-monitoring = false
-script = ExtResource("3_h0avi")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_gcpv3")
-
-[node name="CollisionBoxComponent" type="Area2D" parent="."]
-input_pickable = false
-monitorable = false
-script = ExtResource("8_6hbdw")
-refresh_context = true
-tick_speed = 0.5
-collision_effects = Array[ExtResource("9_ojcfy")]([SubResource("Resource_ejl58")])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBoxComponent"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_gcpv3")
-
 [node name="RotationComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("12_3aguo")
 horizontal_only = true
@@ -100,27 +46,15 @@ sprite = NodePath("../Sprite2D")
 [node name="EffectComponent" type="Node2D" parent="."]
 script = ExtResource("13_f1575")
 
-[node name="BoidComponent" type="Area2D" parent="." node_paths=PackedStringArray("movement_component")]
-collision_layer = 64
-collision_mask = 64
-input_pickable = false
-script = ExtResource("14_f4pso")
+[node name="GPUBoidComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
+script = ExtResource("15_gnegw")
 movement_component = NodePath("../MovementComponent")
-radius = 60
-
-[node name="SqueezeBox2" type="CollisionShape2D" parent="BoidComponent"]
-position = Vector2(0, 42)
-shape = SubResource("CircleShape2D_n5msg")
+metadata/_custom_type_script = "uid://cyrp00qrr6jiv"
 
 [connection signal="death" from="StatsComponent" to="." method="_on_death" flags=3]
-[connection signal="death" from="StatsComponent" to="HitBoxComponent" method="_on_death"]
 [connection signal="velocity_changed" from="MovementComponent" to="." method="_on_velocity_changed"]
 [connection signal="direction_changed" from="TrackingComponent" to="MovementComponent" method="set_direction"]
 [connection signal="direction_changed" from="TrackingComponent" to="RotationComponent" method="change_rotation"]
-[connection signal="damage_taken" from="HitBoxComponent" to="StatsComponent" method="_on_damage_taken"]
-[connection signal="effect_applied" from="HitBoxComponent" to="EffectComponent" method="_on_effect_applied"]
-[connection signal="area_entered" from="CollisionBoxComponent" to="CollisionBoxComponent" method="_on_area_entered"]
-[connection signal="attack_context_requested" from="CollisionBoxComponent" to="." method="_on_attack_context_requested"]
 [connection signal="effect_applied" from="EffectComponent" to="StatsComponent" method="_on_effect_applied"]
 [connection signal="effect_applied" from="EffectComponent" to="MovementComponent" method="_on_effect_applied"]
 [connection signal="effect_applied" from="EffectComponent" to="KnockbackComponent" method="_on_effect_applied"]

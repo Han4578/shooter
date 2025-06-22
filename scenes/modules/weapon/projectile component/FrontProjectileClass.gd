@@ -17,6 +17,7 @@ func _physics_process(delta: float) -> void:
 	position += velocity * delta
 	
 func load_details(pos: Vector2, rot: float, despawn: float, speed: int, atk_context: AttackContext) -> void:
+	reset_state()
 	global_position = pos
 	despawn_time = despawn
 	movement_component.set_direction(Vector2.from_angle(rot))
@@ -34,13 +35,12 @@ func _on_area_collided() -> void:
 	call_deferred(&"return_to_pool")
 	
 func return_to_pool():
+	timer.stop()
 	get_parent().remove_child(self)
 	Pooling.return_entity(self)
-	reset_state()
 	
 func reset_state() -> void:
 	hit_count = initial_hit_count
-	timer.stop()
 	movement_component.reset_state()
 	collision_component.reset_state()
 	

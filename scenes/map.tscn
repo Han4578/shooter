@@ -1,19 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://df4gk115fxibq"]
+[gd_scene load_steps=12 format=3 uid="uid://df4gk115fxibq"]
 
-[ext_resource type="Script" path="res://scenes/map.gd" id="1_2qbe3"]
-[ext_resource type="Script" path="res://scenes/tiles/floor.gd" id="1_4f4u1"]
+[ext_resource type="Script" uid="uid://dtjhpb6stic8j" path="res://scenes/map.gd" id="1_2qbe3"]
+[ext_resource type="Script" uid="uid://b2v4cihkn1n0n" path="res://scenes/tiles/floor.gd" id="1_4f4u1"]
 [ext_resource type="PackedScene" uid="uid://cbmcq0mfj2en3" path="res://scenes/player/player.tscn" id="2_ulyay"]
-[ext_resource type="Script" path="res://scenes/enemies/spawner.gd" id="3_yica7"]
+[ext_resource type="Script" uid="uid://ccxu4o34nouqv" path="res://scenes/enemies/spawner.gd" id="3_yica7"]
 [ext_resource type="PackedScene" uid="uid://cgjkwnxubbg6i" path="res://scenes/UI/UI.tscn" id="4_pclxl"]
 [ext_resource type="PackedScene" uid="uid://22cha2x1awlc" path="res://scenes/items/ground item/GroundCollectible.tscn" id="5_535xt"]
 [ext_resource type="Resource" uid="uid://dphjj40fqr3th" path="res://attachments/glove in a box/glove_in_a_box.tres" id="8_folem"]
 [ext_resource type="Resource" uid="uid://n16cxb28okm" path="res://scenes/weapons/pistol/pistol_item.tres" id="8_g4fl3"]
 [ext_resource type="Resource" uid="uid://dkhjabsvagfe8" path="res://scenes/weapons/pump action shotgun/shotgun_item.tres" id="9_jri5i"]
+[ext_resource type="Script" uid="uid://dwklaiyqindx5" path="res://scenes/enemies/BoidCalculator.gd" id="10_blm8a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmyxk"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_2qbe3")
+
+[node name="BoidCalculator" type="Node2D" parent="."]
+script = ExtResource("10_blm8a")
+metadata/_custom_type_script = "uid://dwklaiyqindx5"
 
 [node name="UI" parent="." instance=ExtResource("4_pclxl")]
 
@@ -34,7 +39,6 @@ script = ExtResource("3_yica7")
 
 [node name="Timer" type="Timer" parent="Entity Layer/Spawner"]
 wait_time = 0.5
-autostart = true
 
 [node name="Player2" parent="Entity Layer" instance=ExtResource("2_ulyay")]
 

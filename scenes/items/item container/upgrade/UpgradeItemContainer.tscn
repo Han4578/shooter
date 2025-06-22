@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0ymen4yhdw58"]
 
-[ext_resource type="Script" path="res://scenes/items/item container/upgrade/UpgradeItemContainer.gd" id="1_c1js2"]
+[ext_resource type="Script" uid="uid://d3hqb3qd8a8rj" path="res://scenes/items/item container/upgrade/UpgradeItemContainer.gd" id="1_c1js2"]
 
 [node name="ItemContainer" type="Control"]
 z_index = 1

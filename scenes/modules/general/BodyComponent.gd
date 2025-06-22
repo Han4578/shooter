@@ -1,7 +1,8 @@
-extends CharacterBody2D
+extends Node2D
 class_name BodyComponent
 
 var stat_upgrades := StatUpgrades.new()
+var velocity := Vector2.ZERO
 @export var entity_type: Pooling.EntityTypes
 @export var stats_component: StatsComponent
 
@@ -11,6 +12,7 @@ func _physics_process(delta: float) -> void:
 	
 func _enter_tree() -> void:
 	Pooling.entities[entity_type][self] = null
+	reset_state()
 
 func reset_state() -> void:
 	for node: Node2D in get_children(true):
@@ -23,7 +25,6 @@ func _on_death() -> void:
 	get_parent().remove_child(self)
 	Pooling.entities[entity_type].erase(self)
 	Pooling.return_entity(self)
-	reset_state()
 
 func create_attack_context() -> AttackContext:
 	var attack_context := AttackContext.new()

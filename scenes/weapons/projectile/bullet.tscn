@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bffo61oboxv55"]
 
-[ext_resource type="Script" path="res://scenes/modules/weapon/projectile component/FrontProjectileClass.gd" id="1_i65di"]
+[ext_resource type="Script" uid="uid://coom86gjkntkc" path="res://scenes/modules/weapon/projectile component/FrontProjectileClass.gd" id="1_i65di"]
 [ext_resource type="Texture2D" uid="uid://dxu477u2l2iym" path="res://sprites/bullet.png" id="2_oq8ul"]
-[ext_resource type="Script" path="res://scenes/modules/general/movement component/MovementComponent.gd" id="3_olnit"]
-[ext_resource type="Script" path="res://scenes/modules/general/CollisionBoxComponent.gd" id="4_qv5am"]
+[ext_resource type="Script" uid="uid://by2rvbeoqg700" path="res://scenes/modules/general/movement component/MovementComponent.gd" id="3_olnit"]
+[ext_resource type="Script" uid="uid://vg2ey1ygntjv" path="res://scenes/modules/general/CollisionBoxComponent.gd" id="4_qv5am"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7yt3"]
 size = Vector2(16, 10)

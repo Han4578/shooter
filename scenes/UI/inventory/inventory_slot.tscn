@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cs5au6lto2f20"]
 
-[ext_resource type="Script" path="res://scenes/UI/inventory/inventory_slot.gd" id="1_ikgpu"]
+[ext_resource type="Script" uid="uid://cvc60rjo3jutd" path="res://scenes/UI/inventory/inventory_slot.gd" id="1_ikgpu"]
 
 [node name="Control" type="ColorRect"]
 process_mode = 2
