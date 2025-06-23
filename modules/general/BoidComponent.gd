@@ -12,11 +12,11 @@ func  _physics_process(_delta: float) -> void:
 
 
 func _on_death() -> void:
-	Pooling.entities[Pooling.EntityTypes.BOID].erase(self)
+	Pooling.entities[Pooling.BOID_ENTITY].erase(self)
 
 
 func reset_state() -> void:
-	Pooling.entities[Pooling.EntityTypes.BOID][self] = null
+	Pooling.entities[Pooling.BOID_ENTITY][self] = Pooling.entities[Pooling.BOID_ENTITY].size()
 	
 	
 func set_final_velocity(new_velocity: Vector2) -> void:

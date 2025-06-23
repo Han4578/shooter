@@ -21,6 +21,11 @@ layout(set = 0, binding = 4, std430) restrict writeonly buffer Boids {
 }
 boids;
 
+layout(set = 0, binding = 6, std140) restrict readonly uniform BoidInfo {
+    uint boid_radius;
+}
+boid_info;
+
 
 #include "functions.glsl"
 

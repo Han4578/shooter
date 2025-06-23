@@ -13,11 +13,11 @@ var stat_upgrades := StatUpgrades.new()
 func get_final_damage(scaling_parameter: ScalingParameter) -> float:
 	return scaling_parameter.get_amount(self) * (1 + stat_upgrades.damage_bonus)
 	
-func collide(area: HitBoxComponent):
+func collide(area: BodyComponent):
 	for effect: CollisionEffect in stat_upgrades.collision_effects:
 		effect.apply(area, self)
 		
-func hit(area: HitBoxComponent):
+func hit(area: BodyComponent):
 	for effect: HitEffect in stat_upgrades.hit_effects:
 		area.apply_effect(effect, self)
 		

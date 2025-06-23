@@ -1,40 +1,34 @@
 [gd_scene load_steps=6 format=3 uid="uid://bffo61oboxv55"]
 
-[ext_resource type="Script" uid="uid://coom86gjkntkc" path="res://scenes/modules/weapon/projectile component/FrontProjectileClass.gd" id="1_i65di"]
+[ext_resource type="Script" uid="uid://coom86gjkntkc" path="res://modules/weapon/projectile component/FrontProjectileClass.gd" id="1_i65di"]
 [ext_resource type="Texture2D" uid="uid://dxu477u2l2iym" path="res://sprites/bullet.png" id="2_oq8ul"]
-[ext_resource type="Script" uid="uid://by2rvbeoqg700" path="res://scenes/modules/general/movement component/MovementComponent.gd" id="3_olnit"]
-[ext_resource type="Script" uid="uid://vg2ey1ygntjv" path="res://scenes/modules/general/CollisionBoxComponent.gd" id="4_qv5am"]
+[ext_resource type="Script" uid="uid://by2rvbeoqg700" path="res://modules/general/movement component/MovementComponent.gd" id="3_olnit"]
+[ext_resource type="Script" uid="uid://vg2ey1ygntjv" path="res://modules/general/CollisionBoxComponent.gd" id="4_qv5am"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7yt3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv5or"]
 size = Vector2(16, 10)
 
-[node name="Projectile" type="Node2D" node_paths=PackedStringArray("movement_component", "collision_component", "timer")]
+[node name="Projectile" type="Node2D" node_paths=PackedStringArray("movement_component", "collision_box_component", "timer")]
 script = ExtResource("1_i65di")
 movement_component = NodePath("MovementComponent")
-collision_component = NodePath("CollisionBoxComponent")
+collision_box_component = NodePath("Sprite2D/CollisionBoxComponent")
 timer = NodePath("Timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_oq8ul")
 
-[node name="MovementComponent" type="Node2D" parent="."]
-script = ExtResource("3_olnit")
-
-[node name="CollisionBoxComponent" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 2
-monitorable = false
+[node name="CollisionBoxComponent" type="Node2D" parent="Sprite2D"]
 script = ExtResource("4_qv5am")
 one_shot = true
+shape = SubResource("RectangleShape2D_sv5or")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBoxComponent"]
-shape = SubResource("RectangleShape2D_y7yt3")
+[node name="MovementComponent" type="Node2D" parent="."]
+script = ExtResource("3_olnit")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
+[connection signal="collision_depleted" from="Sprite2D/CollisionBoxComponent" to="." method="return_to_pool" flags=3]
 [connection signal="velocity_changed" from="MovementComponent" to="." method="_on_velocity_changed"]
-[connection signal="area_collided" from="CollisionBoxComponent" to="." method="_on_area_collided"]
-[connection signal="area_entered" from="CollisionBoxComponent" to="CollisionBoxComponent" method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="return_to_pool"]

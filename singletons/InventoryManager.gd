@@ -1,10 +1,10 @@
-extends Node2D
+extends Node
 
 const num_of_weapon_slots := 5
 const inventory_weapon_slot_count := 16
 const inventory_chip_slot_count := 24
 const inventory_attachment_slot_count := 24
-var active_weapon_index := 0
+var active_weapon_index := 0	
 var weapons: Array[Weapon] = []
 var is_passive: Array[bool] = []
 

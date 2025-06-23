@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://btoocuprax4oj"]
 
-[ext_resource type="Script" uid="uid://dbpya3cdrkupi" path="res://scenes/modules/general/BodyComponent.gd" id="1_bksu2"]
+[ext_resource type="Script" uid="uid://dbpya3cdrkupi" path="res://modules/general/BodyComponent.gd" id="1_bksu2"]
 [ext_resource type="Texture2D" uid="uid://d3gltw4bfbp7c" path="res://sprites/alien.png" id="2_ro1ih"]
-[ext_resource type="Script" uid="uid://dhv5ctu3yg1cl" path="res://scenes/modules/general/StatsComponent.gd" id="2_yyjhs"]
-[ext_resource type="Script" uid="uid://by2rvbeoqg700" path="res://scenes/modules/general/movement component/MovementComponent.gd" id="3_rthbm"]
-[ext_resource type="Script" uid="uid://bvs746kb650us" path="res://scenes/modules/general/movement component/TrackingComponent.gd" id="4_gavij"]
-[ext_resource type="Script" uid="uid://c4qbxa54svf24" path="res://scenes/modules/general/movement component/knockback_component.gd" id="5_t446y"]
-[ext_resource type="Script" uid="uid://b86xcg7pffs01" path="res://scenes/modules/general/RotationComponent.gd" id="12_3aguo"]
-[ext_resource type="Script" uid="uid://brxf07dp7pdpp" path="res://scenes/modules/general/EffectComponent.gd" id="13_f1575"]
-[ext_resource type="Script" uid="uid://cyrp00qrr6jiv" path="res://scenes/modules/general/BoidComponent.gd" id="15_gnegw"]
+[ext_resource type="Script" uid="uid://dhv5ctu3yg1cl" path="res://modules/general/StatsComponent.gd" id="2_yyjhs"]
+[ext_resource type="Script" uid="uid://by2rvbeoqg700" path="res://modules/general/movement component/MovementComponent.gd" id="3_rthbm"]
+[ext_resource type="Script" uid="uid://bvs746kb650us" path="res://modules/general/movement component/TrackingComponent.gd" id="4_gavij"]
+[ext_resource type="Script" uid="uid://c4qbxa54svf24" path="res://modules/general/movement component/knockback_component.gd" id="5_t446y"]
+[ext_resource type="Script" uid="uid://b86xcg7pffs01" path="res://modules/general/RotationComponent.gd" id="12_3aguo"]
+[ext_resource type="Script" uid="uid://brxf07dp7pdpp" path="res://modules/general/EffectComponent.gd" id="13_f1575"]
+[ext_resource type="Script" uid="uid://cyrp00qrr6jiv" path="res://modules/general/BoidComponent.gd" id="15_gnegw"]
 
 [node name="Alien" type="Node2D" node_paths=PackedStringArray("stats_component") groups=["Enemy"]]
 z_index = 1
@@ -46,12 +46,14 @@ sprite = NodePath("../Sprite2D")
 [node name="EffectComponent" type="Node2D" parent="."]
 script = ExtResource("13_f1575")
 
-[node name="GPUBoidComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
+[node name="BoidComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
 script = ExtResource("15_gnegw")
 movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://cyrp00qrr6jiv"
 
-[connection signal="death" from="StatsComponent" to="." method="_on_death" flags=3]
+[connection signal="damage_taken" from="." to="StatsComponent" method="_on_damage_taken"]
+[connection signal="effect_applied" from="." to="EffectComponent" method="_on_effect_applied"]
+[connection signal="death" from="StatsComponent" to="." method="_on_death"]
 [connection signal="velocity_changed" from="MovementComponent" to="." method="_on_velocity_changed"]
 [connection signal="direction_changed" from="TrackingComponent" to="MovementComponent" method="set_direction"]
 [connection signal="direction_changed" from="TrackingComponent" to="RotationComponent" method="change_rotation"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtl24f36yqdp"]
 
-[ext_resource type="Shader" uid="uid://dtyk6fob577of" path="res://scenes/modules/general/particle generator/Throwable.gdshader" id="1_0egmx"]
-[ext_resource type="Script" uid="uid://5pd2jkny7xh5" path="res://scenes/modules/general/particle generator/ParticleGenerator.gd" id="1_2j1by"]
+[ext_resource type="Shader" uid="uid://dtyk6fob577of" path="res://modules/general/particle generator/Throwable.gdshader" id="1_0egmx"]
+[ext_resource type="Script" uid="uid://5pd2jkny7xh5" path="res://modules/general/particle generator/ParticleGenerator.gd" id="1_2j1by"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_op56w"]
 shader = ExtResource("1_0egmx")

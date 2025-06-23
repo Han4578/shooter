@@ -21,18 +21,20 @@ var bin_uniform: RDUniform
 var temp_bin_uniform: RDUniform
 var boids_uniform: RDUniform
 var config_uniform: RDUniform
+var boid_info_uniform: RDUniform
 
 var bin_buffer: RID
 var temp_bin_buffer: RID
+var boid_info_buffer: RID
 
 const TABLE_LENGTH := 4096
 const TABLE_BYTE_SIZE := TABLE_LENGTH * 4
 const bin_workgroups := ceili(TABLE_LENGTH / 32.0)
 const PREFIX_LOOP_COUNT := ceili(log(TABLE_LENGTH) / log(2))
+const BOID_RADIUS := 40
 
 
-func _enter_tree() -> void:
-	process_physics_priority = 1
+func _ready() -> void:
 	rd = RenderingServer.create_local_rendering_device()
 	
 	to_bin_shader = _create_shader(&"res://compute shader/to_bin.glsl")
@@ -52,12 +54,15 @@ func _enter_tree() -> void:
 	temp_bin_uniform = _create_uniform(3)
 	boids_uniform = _create_uniform(4)
 	config_uniform = _create_uniform(5, RenderingDevice.UNIFORM_TYPE_UNIFORM_BUFFER)
+	boid_info_uniform = _create_uniform(6, RenderingDevice.UNIFORM_TYPE_UNIFORM_BUFFER)
 		
 	bin_buffer = rd.storage_buffer_create(TABLE_BYTE_SIZE)	
 	temp_bin_buffer = rd.storage_buffer_create(TABLE_BYTE_SIZE)
+	boid_info_buffer = rd.uniform_buffer_create(16, PackedInt32Array([BOID_RADIUS * 2, 0, 0, 0]).to_byte_array())
 	
 	bin_uniform.add_id(bin_buffer)
 	temp_bin_uniform.add_id(temp_bin_buffer)
+	boid_info_uniform.add_id(boid_info_buffer)
 	
 
 
@@ -66,7 +71,7 @@ func _physics_process(_delta: float) -> void:
 	
 	
 func _calculate_boids() -> void:
-	if Pooling.entities[Pooling.EntityTypes.BOID].size() == 0: return
+	if Pooling.entities[Pooling.BOID_ENTITY].size() == 0: return
 	# Create buffers
 	var positions := PackedVector2Array()
 	
@@ -86,7 +91,7 @@ func _calculate_boids() -> void:
 	results_uniform.add_id(results_buffer)
 	boids_uniform.add_id(boids_buffer)
 	
-	var to_bin_uniform_set := rd.uniform_set_create([positions_uniform, bin_uniform], to_bin_shader, 0)
+	var to_bin_uniform_set := rd.uniform_set_create([positions_uniform, bin_uniform, boid_info_uniform], to_bin_shader, 0)
 	
 	var boid_workgroups := ceili(positions.size() / 32.0)
 	var prefix_offset := 1
@@ -121,8 +126,8 @@ func _calculate_boids() -> void:
 		temp_bin_buffer = temp
 		prefix_offset <<= 1
 	
-	var boid_reindex_uniform_set := rd.uniform_set_create([positions_uniform, bin_uniform, boids_uniform], boid_reindex_shader, 0)
-	var calculate_boids_uniform_set := rd.uniform_set_create([positions_uniform, bin_uniform, boids_uniform, results_uniform], calculate_boids_shader, 0)
+	var boid_reindex_uniform_set := rd.uniform_set_create([positions_uniform, bin_uniform, boids_uniform, boid_info_uniform], boid_reindex_shader, 0)
+	var calculate_boids_uniform_set := rd.uniform_set_create([positions_uniform, bin_uniform, boids_uniform, results_uniform, boid_info_uniform], calculate_boids_shader, 0)
 	
 	_dispatch_pipeline(boid_reindex_pipeline, boid_workgroups, compute_list, boid_reindex_uniform_set)
 	rd.compute_list_add_barrier(compute_list)
@@ -131,9 +136,10 @@ func _calculate_boids() -> void:
 	
 	rd.submit()
 	rd.sync()
-	
+
 	var results := rd.buffer_get_data(results_buffer)
 	var i := 0
+	
 	
 	for boid: BoidComponent in Pooling.entities[Pooling.EntityTypes.BOID].keys():
 		boid.set_final_velocity(Vector2(results.decode_float(i * 8), results.decode_float(i * 8 + 4)))
@@ -142,9 +148,11 @@ func _calculate_boids() -> void:
 	positions_uniform.clear_ids()
 	results_uniform.clear_ids()
 	boids_uniform.clear_ids()
+	
 	rd.free_rid(to_bin_uniform_set)
 	rd.free_rid(boid_reindex_uniform_set)
 	rd.free_rid(calculate_boids_uniform_set)
+	
 	rd.free_rid(positions_buffer)
 	rd.free_rid(results_buffer)
 	rd.free_rid(boids_buffer)
@@ -179,5 +187,6 @@ func _exit_tree() -> void:
 	
 	rd.free_rid(bin_buffer)
 	rd.free_rid(temp_bin_buffer)
+	rd.free_rid(boid_info_buffer)
 	rd.free()
 	

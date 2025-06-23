@@ -28,7 +28,12 @@ layout(set = 0, binding = 4, std430) restrict buffer Boids {
 boids;
 
 
-layout(set = 0, binding = 5, std140) restrict buffer Config{
-    uint data[];
+layout(set = 0, binding = 5, std140) restrict uniform Config{
+    uint prefix_offset;
 }
 config;
+
+layout(set = 0, binding = 6, std140) restrict uniform BoidInfo {
+    uint boid_radius;
+}
+boid_info;

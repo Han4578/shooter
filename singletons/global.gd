@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var player : CharacterBody2D
 var map : Node2D

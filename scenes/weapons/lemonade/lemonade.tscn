@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cgywvdiri7hbt" path="res://scenes/weapons/lemonade/lemonade.png" id="2_1rngi"]
 [ext_resource type="Script" uid="uid://cis2khbgefsxy" path="res://scenes/weapons/weapon_class.gd" id="6_wcvgj"]
-[ext_resource type="Script" uid="uid://bxq7c2k1qscoa" path="res://scenes/modules/weapon/target component/TargetComponent.gd" id="7_1m6y7"]
-[ext_resource type="Script" uid="uid://xpsfb5rv0rjv" path="res://scenes/modules/weapon/trigger component/SingleTriggerComponent.gd" id="8_x8wjq"]
-[ext_resource type="Script" uid="uid://vw3k7bf7g3xh" path="res://scenes/modules/weapon/barrel component/AreaBarrelComponent.gd" id="9_ol1nn"]
+[ext_resource type="Script" uid="uid://bxq7c2k1qscoa" path="res://modules/weapon/target component/TargetComponent.gd" id="7_1m6y7"]
+[ext_resource type="Script" uid="uid://xpsfb5rv0rjv" path="res://modules/weapon/trigger component/SingleTriggerComponent.gd" id="8_x8wjq"]
+[ext_resource type="Script" uid="uid://vw3k7bf7g3xh" path="res://modules/weapon/barrel component/AreaBarrelComponent.gd" id="9_ol1nn"]
 
 [node name="MainWeapon" type="Node2D"]
 z_index = 1

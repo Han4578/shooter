@@ -15,6 +15,11 @@ layout(set = 0, binding = 2, std430) restrict writeonly buffer Bin {
 }
 bin;
 
+layout(set = 0, binding = 6, std140) restrict readonly uniform BoidInfo {
+    uint boid_radius;
+}
+boid_info;
+
 #include "functions.glsl"
 
 // The code we want to execute in each invocation

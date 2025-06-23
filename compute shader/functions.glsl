@@ -1,5 +1,5 @@
 ivec2 to_cell(in vec2 coords) {
-	return ivec2(floor(coords.x / 60), floor(coords.y / 60));
+	return ivec2(floor(coords.x / boid_info.boid_radius), floor(coords.y / boid_info.boid_radius));
 }
 
 

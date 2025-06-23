@@ -27,6 +27,11 @@ layout(set = 0, binding = 4, std430) restrict readonly buffer Boids {
 }
 boids;
 
+layout(set = 0, binding = 6, std140) restrict readonly uniform BoidInfo {
+    uint boid_radius;
+}
+boid_info;
+
 
 #include "functions.glsl"
 
@@ -50,7 +55,7 @@ void main() {
 
 				if (other == gl_GlobalInvocationID.x) continue;
 
-				separation -= max(0, 1 - length(other_pos - pos) / 60.0) * normalize(other_pos - pos);
+				separation -= max(0, 1 - length(other_pos - pos) / boid_info.boid_radius) * normalize(other_pos - pos);
 			}
 		}
 	}

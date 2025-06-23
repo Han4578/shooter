@@ -2,6 +2,10 @@ extends Node
 
 enum EntityTypes {ALLY = 0, ENEMY = 1, BOID = 2}
 
+const ALLY_ENTITY := EntityTypes.ALLY
+const ENEMY_ENTITY := EntityTypes.ENEMY
+const BOID_ENTITY := EntityTypes.BOID
+
 var entities: Array[Dictionary] = [{}, {}, {}]
 
 var pool := {}

@@ -18,11 +18,11 @@ func spawn_alien():
 	var alien := Pooling.get_entity(alien_scene)
 	alien.position = Vector2(x, y)
 	add_sibling(alien)
-	
-	
-var count := 0
-func _physics_process(delta: float) -> void:
-	spawn_alien()
-	count += 1
-	if count == 1000: set_physics_process(false)
+	#
+	#
+#var count := 0
+#func _physics_process(delta: float) -> void:
+	#spawn_alien()
+	#count += 1
+	#if count == 1000: set_physics_process(false)
 	
